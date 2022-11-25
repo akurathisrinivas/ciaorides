@@ -29,10 +29,10 @@ class Driver1_model extends CI_Model {
                   */
       }
 
-      public function previous_booking_data(){
+      public function previous_booking_data($driver_id){
 
             $query="select trip_distance,total_amount,ride_time from taxi_orders where rider_id='$driver_id' and payment_status='paid' and status='completed' and driver_status='Started' and rider_payment_status='paid' order by ride_time desc";
-
+            //echo $query;exit;
             $res=$this->db->query($query)->row_array();
             if(!empty($res)){
                   $result=array(
@@ -51,12 +51,18 @@ class Driver1_model extends CI_Model {
         return $result;
       }
 
-      public function total_bookings(){
-            return '100';
+      public function total_bookings($driver_id){
+
+            $query="select count(id) as booking_count from taxi_orders where rider_id='$driver_id' and payment_status='paid' and status='completed' and driver_status='Started' and rider_payment_status='paid' order by ride_time desc";
+            $res=$this->db->query($query)->row_array();
+            return $res['booking_count'];
       }
 
-      public function total_earnings(){
+      public function total_earnings($driver_id){
             
+             $query="select SUM(total_amount) as final_amount from taxi_orders where rider_id='$driver_id' and payment_status='paid' and status='completed' and driver_status='Started' and rider_payment_status='paid' order by ride_time desc";
+            $res=$this->db->query($query)->row_array();
+            return $res['final_amount'];
       }
 
 }?>
