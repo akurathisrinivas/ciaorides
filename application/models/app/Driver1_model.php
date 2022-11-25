@@ -52,7 +52,7 @@ class Driver1_model extends CI_Model {
       }
 
       public function total_bookings(){
-
+            return '100';
       }
 
       public function total_earnings(){
