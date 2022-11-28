@@ -169,6 +169,36 @@ class Driver1 extends REST_Controller {
      }
 
 
+     /* Search rides */
+
+     public function search_rides_post(){
+
+
+        $response = array('status' => false, 'message' => '');
+        $user_input = $this->client_request;
+        extract($user_input);
+
+        $required_params = array('driver_id' => 'Drier Id','from_lat'=> 'From lat','from_lng'=>'From lng','vehicle_type'=>'vehicle type','sub_vehicle_type'=>'sub vehicle type');
+        foreach ($required_params as $key => $value) {
+            if (!$user_input[$key]) {
+                $response = array('status' => false, 'message' => $value . ' is required');
+                TrackResponse($user_input, $response);
+                $this->response($response);
+            }
+        }
+
+        $save=$this->driver1_model->save_rider_current_lat_lngs($driver_id,$from_lat,$from_lng);
+
+        $result=$this->driver1_model->search_rides($driver_id,$vehicle_type,$sub_vehicle_type,$from_lat,$from_lng);
+
+        $response = array('status' => true, 'message' => 'Data Fetched successfully!','response' => $result);
+        TrackResponse($user_input, $response);
+        $this->response($response);
+
+    }
+
+
+
 
 }
 
