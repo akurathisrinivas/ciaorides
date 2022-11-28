@@ -1343,12 +1343,6 @@ class Sharing extends REST_Controller {
         $this->response($response);
     }
     
-    
-    
-    function checkGit_get(){
-        
-        echo 'Testing';
-    }
 
 
 }
