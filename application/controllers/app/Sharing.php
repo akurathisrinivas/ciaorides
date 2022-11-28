@@ -118,7 +118,14 @@ class Sharing extends REST_Controller {
         $cancellation_charges = get_table_row('orders', array('cancellation_charges_status' => 'unpaid', 'status' => 'cancelled by user', 'user_id' => $user_id), '', 'id', 'desc');
         //echo $this->db->last_query();
 
-        $response = array('status' => true, 'message' => 'Distance Calculated Successfully!', 'response' => $km, 'amount' => round($amount), 'tax' => round($tax), 'payment_gateway_commision' => round($payment_gateway_commision), 'ciao_commission' => round($ciao_commission), 'total_amount' => round($total_amount), 'cancellation_charges' => (int) $cancellation_charges['cancellation_charges'], 'amount_per_head' => round($amount_per_head), 'base_fare' => (int) $calculations['base_fare'], 'per_seat_amount' => round($per_seat_amount));
+        if($amount !=0){
+
+            $response = array('status' => true, 'message' => 'Distance Calculated Successfully!', 'response' => $km, 'amount' => round($amount), 'tax' => round($tax), 'payment_gateway_commision' => round($payment_gateway_commision), 'ciao_commission' => round($ciao_commission), 'total_amount' => round($total_amount), 'cancellation_charges' => (int) $cancellation_charges['cancellation_charges'], 'amount_per_head' => round($amount_per_head), 'base_fare' => (int) $calculations['base_fare'], 'per_seat_amount' => round($per_seat_amount));
+        }else{
+        $response = array('status' => false, 'message' => 'Failed to Data Calculated!', 'response' => $km);
+        }
+
+
         $this->response($response);
     }
 
