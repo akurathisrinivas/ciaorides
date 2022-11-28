@@ -65,4 +65,28 @@ class Driver1_model extends CI_Model {
             return $res['final_amount'];
       }
 
+      public function save_rider_current_lat_lngs($driver_id,$from_lat,$from_lng){
+
+            $insert_array=array(
+                                    'rider_id'=>$driver_id,
+                                    'lat'=>$from_lat,
+                                    'lng'=>$from_lng,
+                                    'created_on'=>date('Y-m-d H:i:s')
+                               );
+            $result=$this->db->insert('rider_current_location', $insert_array);
+            return $result;
+      }
+
+      public function search_rides($driver_id,$vehicle_type,$sub_vehicle_type,$from_lat,$from_lng){
+
+            /* getting rides from taxi_orders status pending and time ridetime between now to 30 min */
+            /* apply filter from, to lat lngs with in the 10 km range get user details from taxi_orders */ 
+
+            $query="select booking_id,user_id,ride_time from taxi_orders where vehicle_type='$vehicle_type' and sub_vehicle_type='$sub_vehicle_type' and status='pending' and driver_status='Not Started' ";
+            $orders=$this->db->query($query)->result_array();
+
+            return $orders;
+
+      }
+
 }?>
