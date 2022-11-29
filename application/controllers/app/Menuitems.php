@@ -210,8 +210,10 @@ class Menuitems extends REST_Controller {
         $response = array('status' => false, 'message' => '');
         $user_input = $this->client_request;
         extract($user_input);
+         
+//         /'vehicle_registration_number' => 'Vehicle registration number'
 
-        $required_params = array('vehicle_id' => 'Vehicle ID',  'vehicle_registration_image' => 'Vehicle registration image', 'vehicle_registration_number' => 'Vehicle registration number');
+        $required_params = array('vehicle_id' => 'Vehicle ID',  'vehicle_registration_image' => 'Vehicle registration image');
         foreach ($required_params as $key => $value) {
             if (!$user_input[$key]) {
                 $response = array('status' => false, 'message' => $value . ' is required');
@@ -247,10 +249,10 @@ class Menuitems extends REST_Controller {
          
 
         $update_data=array(
-            'number_plate'=>$vehicle_registration_number,
-            'fitness_certification_number'=>$fitness_certification_number,
-            'vehicle_insurance_number'=>$vehicle_insurance_number,
-            'vehicle_permit_number'=>$vehicle_permit_number,
+            'number_plate'=>'1234',
+            'fitness_certification_number'=>'1234',
+            'vehicle_insurance_number'=>'1234',
+            'vehicle_permit_number'=>'1234',
             'vehicle_registration_image'=>$vehicle_registration_img_path,
             'vehicle_insurance_image'=>$vehicle_insurance_img_path,
             'fitness_certification_image'=>$fitness_certification_img_path,
