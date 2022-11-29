@@ -1747,6 +1747,10 @@ location yet.!", 'distance' => number_format($km, 2),  'response' => NULL);
         
         
         $user_details = $this->taxiflow_model->user_details($user_id);
+        if($user_details['profile_pic'] == ''){
+            $defalut_img="https://ciaorides.com/testingnew/ciaorides/assets/images/no_image.png";
+            $user_details['profile_pic']= $defalut_img;
+        }
        
         if(empty($user_details)) {
              
