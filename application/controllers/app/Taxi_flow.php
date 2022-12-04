@@ -1777,17 +1777,17 @@ location yet.!", 'distance' => number_format($km, 2),  'response' => NULL);
         $user_input = $this->client_request;
         extract($user_input);
 
-        try {
-            JWT::decode($token, 'secret_server_key');
-            $token_status = "Success";
-        } catch (Exception $e) {
-            $token_status = $e->getmessage();
-        }
-        if ($token_status != "Success") {
-            $response = array('status' => false, 'message' => 'Token Miss Match!');
-            TrackResponse($user_input, $response);
-            $this->response($response);
-        }
+//        try {
+//            JWT::decode($token, 'secret_server_key');
+//            $token_status = "Success";
+//        } catch (Exception $e) {
+//            $token_status = $e->getmessage();
+//        }
+//        if ($token_status != "Success") {
+//            $response = array('status' => false, 'message' => 'Token Miss Match!');
+//            TrackResponse($user_input, $response);
+//            $this->response($response);
+//        }
         
         
         $required_params = array('user_id' => "User ID", 'first_name' => "First Name", 'last_name' => "Last Name", 'dob' => "Date of birth", 'gender' => "Gender");
@@ -1874,8 +1874,15 @@ location yet.!", 'distance' => number_format($km, 2),  'response' => NULL);
         //   $this->db->update('user_documents', $RecordData, array('user_id' => $user_id,'document_type'=>'1'));
          $this->db->delete('user_documents', array('user_id' => $user_id,'document_type'=>'1'));
         
-         $driver_license = explode(',', $driver_license);
+   //      $driver_license = explode(',', $driver_license);
             
+            
+//         foreach($driver_license as $driver_license_img){
+//                 print_r($driver_license_img);
+//            }
+            
+//            
+//            
          foreach($driver_license as $driver_license_img){
 
            $insert=array(
@@ -1893,12 +1900,14 @@ location yet.!", 'distance' => number_format($km, 2),  'response' => NULL);
                         );
                 
             $this->db->insert('user_documents',$insert);      
-       }    
+       }   
+            
+            
            $data['driver_license_id'] = $driver_license_id;
             
         }
         
-        
+ 
         // Government
         if($government_file!=''){
             
@@ -1907,7 +1916,7 @@ location yet.!", 'distance' => number_format($km, 2),  'response' => NULL);
                 
            $this->db->delete('user_documents', array('user_id' => $user_id,'document_type'=>'5'));
                 
-           $government_file = explode(',', $government_file);
+       //    $government_file = explode(',', $government_file);
             
             
            foreach($government_file as $government_id_img){
@@ -1931,7 +1940,7 @@ location yet.!", 'distance' => number_format($km, 2),  'response' => NULL);
            $data['government_id'] = $government_id;
             
         }
-        
+    
          
         // PanCard
         if($pan_card!=''){
@@ -1945,7 +1954,7 @@ location yet.!", 'distance' => number_format($km, 2),  'response' => NULL);
 
             
             
-           $pan_card = explode(',', $pan_card);
+       //    $pan_card = explode(',', $pan_card);
             
            
            foreach($pan_card as $pan_card_img){
@@ -1980,7 +1989,7 @@ location yet.!", 'distance' => number_format($km, 2),  'response' => NULL);
            
          $this->db->delete('user_documents', array('user_id' => $user_id,'document_type'=>'2'));
 
-           $aadhar_card = explode(',', $aadhar_card);
+        //   $aadhar_card = explode(',', $aadhar_card);
 
            foreach($aadhar_card as $aadhar_card_img){
 
@@ -2048,15 +2057,14 @@ location yet.!", 'distance' => number_format($km, 2),  'response' => NULL);
         
         //var_dump($data);
         
-        
-        
+    
         $update_user = $this->taxiflow_model->update_user($data, $user_id);
         //echo $this->db->last_query();exit;
         if ($update_user === FALSE) {
             $response = array('status' => false, 'message' => 'User Updation Failed!');
         } else {
             $user_details = $this->taxiflow_model->user_details($user_id);
-            $response = array('status' => true, 'message' => 'User Updation Successful!', 'response' => $user_details);
+            $response = array('status' => true, 'message' => 'User Updation Successful00!', 'response' => $user_details);
         }
         TrackResponse($user_input, $response);
         $this->response($response);
