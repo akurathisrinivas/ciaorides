@@ -169,16 +169,16 @@ class Driver1 extends REST_Controller {
      }
 
 
-     /* Search rides */
+     /* Fetching rides */
 
-     public function search_rides_post(){
+     public function fetching_rides_post(){
 
 
         $response = array('status' => false, 'message' => '');
         $user_input = $this->client_request;
         extract($user_input);
 
-        $required_params = array('driver_id' => 'Drier Id','from_lat'=> 'From lat','from_lng'=>'From lng','vehicle_type'=>'vehicle type','sub_vehicle_type'=>'sub vehicle type');
+        $required_params = array('driver_id' => 'Drier Id','from_lat'=> 'From lat','from_lng'=>'From lng','vehicle_type'=>'vehicle type','sub_vehicle_type'=>'sub vehicle type','travel_type'=> 'Travel type');
         foreach ($required_params as $key => $value) {
             if (!$user_input[$key]) {
                 $response = array('status' => false, 'message' => $value . ' is required');
@@ -189,13 +189,225 @@ class Driver1 extends REST_Controller {
 
         $save=$this->driver1_model->save_rider_current_lat_lngs($driver_id,$from_lat,$from_lng);
 
-        $result=$this->driver1_model->search_rides($driver_id,$vehicle_type,$sub_vehicle_type,$from_lat,$from_lng);
+        $result=$this->driver1_model->search_rides($driver_id,$travel_type,$vehicle_type,$sub_vehicle_type,$from_lat,$from_lng);
 
         $response = array('status' => true, 'message' => 'Data Fetched successfully!','response' => $result);
         TrackResponse($user_input, $response);
         $this->response($response);
 
     }
+
+    /*
+     *  Accept Ride
+     */
+
+    public function accept_ride_post(){
+
+        $response = array('status' => false, 'message' => '');
+        $user_input = $this->client_request;
+        extract($user_input);
+
+        /*try {
+            JWT::decode($token, 'secret_server_key');
+            $token_status = "Success";
+        } catch (Exception $e) {
+            $token_status = $e->getmessage();
+        }
+        if ($token_status != "Success") {
+            $response = array('status' => false, 'message' => 'Token Miss Match!');
+            TrackResponse($user_input, $response);
+            $this->response($response);
+        }*/
+
+        $required_params = array('booking_id'=>'Booking ID','driver_id' => 'Drier Id','vehicle_id'=>'Vehicle ID','user_id'=>'User ID','order_id'=>'Order ID');
+        foreach ($required_params as $key => $value) {
+            if (!$user_input[$key]) {
+                $response = array('status' => false, 'message' => $value . ' is required');
+                TrackResponse($user_input, $response);
+                $this->response($response);
+            }
+        }
+
+        $data = array(
+            'rider_id' => $driver_id,
+            'vehicle_id' => $vehicle_id,
+            'status' => 'accepted',
+            'accepted_date' => date('Y-m-d H:i:s')
+        );
+        //var_dump($data);
+        $unique_id = update_table('taxi_orders', $data, array('id' => $order_id));
+
+
+        //echo $this->db->last_query();
+        if ($unique_id == false) {
+            $response = array('status' => false, 'message' => 'Some Problem found while accepting the Ride!');
+        } else {
+            $rider_details = get_table_row('users', array('id' => $driver_id));
+            $user_details = get_table_row('users', array('id' => $user_id));
+            $first_name = $rider_details['first_name'];
+            $last_name = $rider_details['last_name'];
+            $message = "Your ride with Booking ID: " . $booking_id . " has been accepted by $first_name $last_name";
+            //echo $message;
+            $this->ws_model->send_push_notification($message, 'user', $user_id, 'accepted_request', $mode, $ride_type);
+            SendSMS($user_details['mobile'], $message);
+            $response = array('status' => true, 'message' => 'Ride accepted Successfully!');
+        }
+
+        TrackResponse($user_input, $response);
+        $this->response($response);
+
+    }
+
+    /*
+     *  Reject Ride
+     */
+
+    function reject_ride_post() {
+        $response = array('status' => false, 'message' => '', 'response' => array());
+        $user_input = $this->client_request;
+        extract($user_input);
+
+        /*try {
+            JWT::decode($token, 'secret_server_key');
+            $token_status = "Success";
+        } catch (Exception $e) {
+            $token_status = $e->getmessage();
+        }
+        if ($token_status != "Success") {
+            $response = array('status' => false, 'message' => 'Token Miss Match!');
+            TrackResponse($user_input, $response);
+            $this->response($response);
+        }*/
+
+        $required_params = array('user_id' => "User ID", 'order_id' => "Order ID");
+        foreach ($required_params as $key => $value) {
+            if (!$user_input[$key]) {
+                $response = array('status' => false, 'message' => $value . ' is required');
+                TrackResponse($user_input, $response);
+                $this->response($response);
+            }
+        }
+
+        $data = array(
+            'rider_id' => 0,
+            'vehicle_id' => 0,
+            'status' => 'pending',
+            'accepted_date' => ''
+        );
+        //var_dump($data);
+        $unique_id = update_table('taxi_orders', $data, array('id' => $order_id));
+
+        $data = array(
+            'order_id' => $order_id,
+            'user_id' => $user_id,
+            'driver_id' => $driver_id,
+            'created_on' => date('Y-m-d H:i:s')
+        );
+        //var_dump($data);
+        $unique_id = insert_table('declined_taxi_orders', $data);
+
+        if ($unique_id == 0) {
+            $response = array('status' => false, 'message' => 'Booking not declined!');
+        } else {
+            $order_details = get_table_row('orders', array('id' => $order_id));
+            if ($order_details['ride_type'] == "later" || $order_details['mode'] == "outstation") {
+                $booking_id = $order_details['order_id'];
+                $user_id = $order_details['user_id'];
+                $message = "Driver Rejected Your Request!";
+                $this->ws_model->send_push_notification($message, 'user', $user_id, 'decline_driver');
+            }
+            $response = array('status' => true, 'message' => 'Booking declined Successfully!');
+        }
+        TrackResponse($user_input, $response);
+        $this->response($response);
+    }
+
+    /*
+     *  User Cancel Ride
+     */
+
+    function user_cancel_ride_post() {
+        $response = array('status' => false, 'message' => '', 'response' => array());
+        $user_input = $this->client_request;
+        extract($user_input);
+        /*try {
+            JWT::decode($token, 'secret_server_key');
+            $token_status = "Success";
+        } catch (Exception $e) {
+            $token_status = $e->getmessage();
+        }
+        if ($token_status != "Success") {
+            $response = array('status' => false, 'message' => 'Token Miss Match!');
+            TrackResponse($user_input, $response);
+            $this->response($response);
+        }*/
+        $required_params = array('order_id' => "Order ID", 'rider_id' => "Rider ID", 'booking_id' => "Booking ID", 'user_name' => "User Name", 'user_id' => "User ID");
+        foreach ($required_params as $key => $value) {
+            if (!$user_input[$key]) {
+                $response = array('status' => false, 'message' => $value . ' is required');
+                TrackResponse($user_input, $response);
+                $this->response($response);
+            }
+        }
+        //$order_started = get_table_row('orders', array('id' => $order_id, 'status !=' => 'pending', 'status !=' => 'accepted', 'status !=' => 'cancelled by user', 'status !=' => 'cancelled by rider'));
+        $order_started = $this->driver1_model->check_order_started($order_id);
+        //echo $this->db->last_query();
+        if (!empty((array) $order_started)) {
+            $response = array('status' => false, 'type' => 'reload', 'message' => 'Your ride already started!', 'response' => $order_started);
+            $this->response($response);
+        }
+        $data = array(
+            'status' => 'cancelled by user',
+            'modified_on' => date('Y-m-d H:i:s')
+        );
+        //var_dump($data);
+        $datetime = date('Y-m-d H:i:s');
+        $order_details = get_table_row('taxi_orders', array('id' => $order_id));
+        if ($order_details['ride_type'] == "now" && ($order_details['mode'] == "city" || $order_details['mode'] == "outstation")) {
+            //echo "test";
+            $minutes = (strtotime($order_details['ride_time']) - $datetime) / 60;
+            $calculations = get_table_row('taxi_amount_calculations', array('travel_type' => 'city', 'vehicle_type' => $order_details['vehicle_type']));
+            if ($minutes > $calculations['instant_after_time']) {
+                $cancel_amount = $order_details['amount'] - ($order_details['amount'] * ((100 - $calculations['instant_after_percentage']) / 100));
+            }
+        } elseif ($order_details['ride_type'] == "later" && ($order_details['mode'] == "city" || $order_details['mode'] == "outstation")) {
+            $minutes = (strtotime($order_details['ride_time']) - $datetime) / 60;
+            $calculations = get_table_row('taxi_amount_calculations', array('travel_type' => 'city', 'vehicle_type' => 'car'));
+            if ($minutes > $calculations['schedule_before_time']) {
+                $cancel_amount = $order_details['amount'] - ($order_details['amount'] * ((100 - $calculations['schedule_before_percentage']) / 100));
+            } elseif ($minutes < $calculations['schedule_lessthan_time']) {
+                $cancel_amount = $order_details['amount'] - ($order_details['amount'] * ((100 - $calculations['schedule_lessthan_percentage']) / 100));
+            }
+        }
+        $data['cancellation_charges'] = $cancel_amount;
+        //echo $cancel_amount;exit;
+        $unique_id = update_table('taxi_orders', $data, array('id' => $order_id));
+        //echo $this->db->last_query();
+        if ($unique_id == false) {
+            $response = array('status' => false, 'message' => 'Some Problem found while cancelling the Order!');
+        } else {
+            $message = "Your ride with Booking ID: " . $booking_id . " has been cancelled Successfully!";
+            //echo $message;
+            $this->ws_model->send_push_notification($message, 'user', $user_id, 'cancel_user');
+
+            $user_details = get_table_row('users', array('id' => $user_id));
+            SendSMS($user_details['mobile'], $message);
+
+            $order_details = get_table_row('taxi_orders', array('id' => $order_id));
+
+            $driver_message = "Your ride with Booking ID: " . $booking_id . " has been cancelled by $user_name!";
+            //echo $message;
+            $this->ws_model->send_push_notification($driver_message, 'rider', $rider_id, 'user_cancel_ride', $order_id, $order_details['total_amount'], $order_details['rider_id'], $order_details['vehicle_id'], $order_details['ride_id'], $order_details['mode'], $order_details['ride_type']);
+
+            $rider_details = get_table_row('users', array('id' => $rider_id));
+            SendSMS($rider_details['mobile'], $driver_message);
+
+            $response = array('status' => true, 'message' => 'Booking cancelled Successfully!');
+        }
+        TrackResponse($user_input, $response);
+        $this->response($response);
+    }
+
 
 
 
