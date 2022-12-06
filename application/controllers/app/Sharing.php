@@ -290,7 +290,7 @@ class Sharing extends REST_Controller {
             }
             //print_r($order_details);
           $order_details2=$this->db->query("select response from sample_responses where id=1 ")->row_array();
-          //  echo '<pre>';print_r($order_details2);exit;
+          echo '<pre>';print_r($order_details2);exit;
              
             
             // dummy 
@@ -1303,11 +1303,22 @@ class Sharing extends REST_Controller {
                 $this->response($response);
             }
         }
-        $response = $this->sharing_model->rides_requested($user_id);
+      //  $response = $this->sharing_model->rides_requested($user_id);
+        
+      $order_details2=$this->db->query("select response from sample_responses where id=2 ")->row_array();
+   
+    //    echo '<pre>'; print_r($order_details2['response']); exit;
+        
+        
+        
         if (empty($response)) {
             $response = array('status' => false, 'message' => 'No data available!');
         } else {
-            $response = array('status' => true, 'message' => 'Data fetched Successfully!', 'response' => $response);
+        //    $response = array('status' => true, 'message' => 'Data fetched Successfully!', 'response' => $response);
+      $response = array('status' => true, 'message' => 'Data fetched Successfully!', 'response' => array(json_decode($order_details2['response'])));
+
+            
+            
         }
         TrackResponse($user_input, $response);
         $this->response($response);
@@ -1340,11 +1351,21 @@ class Sharing extends REST_Controller {
                 $this->response($response);
             }
         }
-        $response = $this->sharing_model->rides_requested_later($user_id);
+    //    $response = $this->sharing_model->rides_requested_later($user_id);
+        
+           $order_details2=$this->db->query("select response from sample_responses where id=3 ")->row_array();
+   
+
+        
+        
+        
         if (empty($response)) {
             $response = array('status' => false, 'message' => 'No data available!');
         } else {
-            $response = array('status' => true, 'message' => 'Data fetched Successfully!', 'response' => $response);
+           // $response = array('status' => true, 'message' => 'Data fetched Successfully!', 'response' => $response);
+            
+              $response = array('status' => true, 'message' => 'Data fetched Successfully!', 'response' => array(json_decode($order_details2['response'])));
+
         }
         TrackResponse($user_input, $response);
         $this->response($response);
