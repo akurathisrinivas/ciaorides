@@ -963,5 +963,96 @@ class Menuitems extends REST_Controller {
     
     
     
+    function update_driver_bank_details_step1_post() {
+        $response = array('status' => false, 'message' => '');
+        $user_input = $this->client_request;
+        extract($user_input);
 
+        // try {
+        //     JWT::decode($token, 'secret_server_key');
+        //     $token_status = "Success";
+        // } catch (Exception $e) {
+        //     $token_status = $e->getmessage();
+        // }
+        // if ($token_status != "Success") {
+        //     $response = array('status' => false, 'message' => 'Token Miss Match!');
+        //     TrackResponse($user_input, $response);
+        //     $this->response($response);
+        // }
+
+        $required_params = array('id' => "ID",'user_id' => "User ID", 'country_id' => "Country ID", 'bank_name' => "Bank Name", 'account_holder_name' => "Account Holder Name", 'account_number' => "Account Number", 'ifsc_code' => "IFSC Code");
+        foreach ($required_params as $key => $value) {
+            if (!$user_input[$key]) {
+                $response = array('status' => false, 'message' => $value . ' is required');
+                TrackResponse($user_input, $response);
+                $this->response($response);
+            }
+        }
+
+        //var_dump($image_result);
+        $data = array(
+            'user_id' => $user_id,
+            'country_id' => $country_id,
+            'bank_name' => $bank_name,
+            'account_holder_name' => $account_holder_name,
+            'account_number' => $account_number,
+            'ifsc_code' => $ifsc_code,
+            'created_on' => date('Y-m-d H:i:s')
+        );
+
+      //  delete_record('user_bank_details', array('user_id' => $user_id));
+     //   $unique_id = insert_table('user_bank_details', $data);
+
+        $unique_id=$this->db->where('id', $id)->update('user_bank_details', $data);
+        
+      //echo $this->db->last_query();
+        if ($unique_id == 0) {
+            $response = array('status' => false, 'message' => 'Driver Bank Details Updation Failed!');
+        } else {
+            $response = array('status' => true, 'message' => 'Driver Bank Details Updated Successfully!','response'=>$unique_id);
+        }
+        TrackResponse($user_input, $response);
+        $this->response($response);
+    }
+
+    
+    
+       // driver app add vehicle step 2
+
+     function update_driver_bank_upi_details_step2_post() {
+        $response = array('status' => false, 'message' => '');
+        $user_input = $this->client_request;
+        extract($user_input);
+
+        $required_params = array('user_id' => "User ID",'id' => 'ID','Upi_id' => 'UPI ID',);
+        foreach ($required_params as $key => $value) {
+            if (!$user_input[$key]) {
+                $response = array('status' => false, 'message' => $value . ' is required');
+                TrackResponse($user_input, $response);
+                $this->response($response);
+            }
+        }
+
+    
+
+        $update_data=array(
+            'Upi_id'=>$Upi_id
+                          );
+
+        $unique_id=$this->db->update('user_bank_details',$update_data,array('user_id'=>$user_id,'id'=>$id));
+
+        if ($unique_id == 0) {
+            $response = array('status' => false, 'message' => 'UPI Id Updation Failed!');
+        } else {
+            $response = array('status' => true, 'message' => 'UPI ID Updated Successfully!');
+        }
+        TrackResponse($user_input, $response);
+        $this->response($response);
+
+    }
+
+    
+    
+    
+    
 }
