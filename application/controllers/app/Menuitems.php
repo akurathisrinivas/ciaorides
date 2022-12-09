@@ -908,5 +908,60 @@ class Menuitems extends REST_Controller {
     }
        
     
+    
+    // update emergency contacts  
+
+    function update_driver_emergency_contacts_post(){
+        
+        $response = array('status' => false, 'message' => '');
+        $user_input = $this->client_request;
+        extract($user_input);
+
+        // try {
+        //     JWT::decode($token, 'secret_server_key');
+        //     $token_status = "Success";
+        // } catch (Exception $e) {
+        //     $token_status = $e->getmessage();
+        // }
+        // if ($token_status != "Success") {
+        //     $response = array('status' => false, 'message' => 'Token Miss Match!');
+        //     TrackResponse($user_input, $response);
+        //     $this->response($response);
+        // }
+
+        $required_params = array('id' => "ID",'user_id' => "User ID", 'contact_name' => "Contact Name", 'contact_number' => "Contact Number");
+        foreach ($required_params as $key => $value) {
+            if (!$user_input[$key]) {
+                $response = array('status' => false, 'message' => $value . ' is required');
+                TrackResponse($user_input, $response);
+                $this->response($response);
+            }
+        }
+
+        //var_dump($image_result);
+        
+        $data = array(
+            'name' => $contact_name,
+            'mobile' => $contact_number,
+            'created_on' => date('Y-m-d H:i:s')
+        );
+        
+ 
+        $unique_id=$this->db->where('id', $id)->update('emergency_contacts', $data);
+        
+          //echo $this->db->last_query();
+        if ($unique_id == 0) {
+            $response = array('status' => false, 'message' => 'Emergency Contact Failed!');
+        } else {
+            $response = array('status' => true, 'message' => 'Emergency Contact Updated Successfully!','response'=>$unique_id);
+        }
+        TrackResponse($user_input, $response);
+        $this->response($response);
+    }
+    
+    
+    
+    
+    
 
 }
