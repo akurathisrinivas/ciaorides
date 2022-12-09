@@ -950,17 +950,17 @@ class Menuitems extends REST_Controller {
         $unique_id=$this->db->where('id', $id)->update('emergency_contacts', $data);
         
           //echo $this->db->last_query();
-        if ($unique_id == 0) {
+        if ($id == 0) {
             $response = array('status' => false, 'message' => 'Emergency Contact Failed!');
         } else {
-            $response = array('status' => true, 'message' => 'Emergency Contact Updated Successfully!','response'=>$unique_id);
+            $response = array('status' => true, 'message' => 'Emergency Contact Updated Successfully!','response'=>$id);
         }
         TrackResponse($user_input, $response);
         $this->response($response);
     }
     
     
-    
+
     
     
     function update_driver_bank_details_step1_post() {
@@ -1006,10 +1006,10 @@ class Menuitems extends REST_Controller {
         $unique_id=$this->db->where('id', $id)->update('user_bank_details', $data);
         
       //echo $this->db->last_query();
-        if ($unique_id == 0) {
+        if ($id == 0) {
             $response = array('status' => false, 'message' => 'Driver Bank Details Updation Failed!');
         } else {
-            $response = array('status' => true, 'message' => 'Driver Bank Details Updated Successfully!','response'=>$unique_id);
+            $response = array('status' => true, 'message' => 'Driver Bank Details Updated Successfully!','response'=>$id);
         }
         TrackResponse($user_input, $response);
         $this->response($response);
@@ -1023,8 +1023,21 @@ class Menuitems extends REST_Controller {
         $response = array('status' => false, 'message' => '');
         $user_input = $this->client_request;
         extract($user_input);
+         
+        // try {
+        //     JWT::decode($token, 'secret_server_key');
+        //     $token_status = "Success";
+        // } catch (Exception $e) {
+        //     $token_status = $e->getmessage();
+        // }
+        // if ($token_status != "Success") {
+        //     $response = array('status' => false, 'message' => 'Token Miss Match!');
+        //     TrackResponse($user_input, $response);
+        //     $this->response($response);
+        // }
 
-        $required_params = array('user_id' => "User ID",'id' => 'ID','Upi_id' => 'UPI ID',);
+
+        $required_params = array('user_id' => "User ID",'id' => "ID",'Upi_id' => 'UPI ID',);
         foreach ($required_params as $key => $value) {
             if (!$user_input[$key]) {
                 $response = array('status' => false, 'message' => $value . ' is required');
@@ -1041,13 +1054,187 @@ class Menuitems extends REST_Controller {
 
         $unique_id=$this->db->update('user_bank_details',$update_data,array('user_id'=>$user_id,'id'=>$id));
 
-        if ($unique_id == 0) {
+        if ($id == 0) {
             $response = array('status' => false, 'message' => 'UPI Id Updation Failed!');
         } else {
             $response = array('status' => true, 'message' => 'UPI ID Updated Successfully!');
         }
         TrackResponse($user_input, $response);
         $this->response($response);
+
+    }
+    
+    
+      // driver app edit vehicle step 1
+     
+     function update_driver_vehicles_step1_post() {
+         
+        $response = array('status' => false, 'message' => '');
+        $user_input = $this->client_request;
+        extract($user_input);
+
+        /*try {
+            JWT::decode($token, 'secret_server_key');
+            $token_status = "Success";
+        } catch (Exception $e) {
+            $token_status = $e->getmessage();
+        }
+        if ($token_status != "Success") {
+            $response = array('status' => false, 'message' => 'Token Miss Match!', 'response' => array());
+            TrackResponse($user_input, $response);
+            $this->response($response);
+        }*/
+        $required_params = array('id' => "ID",'user_id' => 'User ID',  'brand_id' => 'Brand Id', 'model_id' => 'Model ID', 'vehicle_type' => 'Vehicle Type');
+        foreach ($required_params as $key => $value) {
+            if (!$user_input[$key]) {
+                $response = array('status' => false, 'message' => $value . ' is required');
+                TrackResponse($user_input, $response);
+                $this->response($response);
+            }
+        }
+
+
+        $data = array(
+            'user_id' => $user_id,
+            'make_id' => $brand_id,
+            'model_id' => $model_id,
+            'vehicle_type' => $vehicle_type,
+            'created_on' => date('Y-m-d H:i:s')
+        );
+
+ 
+         $unique_id=$this->db->where('id', $id)->update('user_vehicles', $data);
+
+         
+       // $unique_id = insert_table('user_vehicles', $data);
+        //echo $this->db->last_query();exit;
+        //$users = user_by_id($user_id);
+        if ($id == 0) {
+            $response = array('status' => false, 'message' => 'Vehicle Details Updating Failed!','response'=>'');
+        } else {
+            $response = array('status' => true, 'message' => 'Vehicle Details Updated Successfully!','response'=>$id);
+        }
+        TrackResponse($user_input, $response);
+        $this->response($response);
+
+    }
+    
+      // driver app edit vehicle step 2
+
+     function update_driver_vehicles_step2_post() {
+        $response = array('status' => false, 'message' => '');
+        $user_input = $this->client_request;
+        extract($user_input);
+         
+//         /'vehicle_registration_number' => 'Vehicle registration number'
+
+        $required_params = array('vehicle_id' => 'Vehicle ID',  'vehicle_registration_image' => 'Vehicle registration image');
+        foreach ($required_params as $key => $value) {
+            if (!$user_input[$key]) {
+                $response = array('status' => false, 'message' => $value . ' is required');
+                TrackResponse($user_input, $response);
+                $this->response($response);
+            }
+        }
+
+       
+        if($vehicle_registration_image!='') {
+            
+        $vehicle_registration_img_path='/storage/VehicleRegistration/'.$vehicle_registration_image;
+            
+            $update_data['vehicle_registration_image']=$vehicle_registration_img_path;
+            
+        }
+         
+
+        if($vehicle_insurance_image!='') {
+            
+           $vehicle_insurance_img_path='/storage/VehicleInsurance/'.$vehicle_insurance_image;
+            
+            $update_data['vehicle_insurance_image']=$vehicle_insurance_img_path;
+            
+        }
+
+         
+        if($fitness_certification_image!='') {
+            
+            $fitness_certification_img_path='/storage/FitnessCertificates/'.$fitness_certification_image;
+            $update_data['fitness_certification_image']=$fitness_certification_img_path;
+        }
+         
+
+        if($vehicle_permit_image!='') {
+            
+            $vehicle_permit_img_path='/storage/VehiclePermit/'.$vehicle_permit_image;
+            
+            $update_data['vehicle_permit_image']=$vehicle_permit_img_path;
+        }
+
+         
+//         print_r($update_data);
+//             exit;
+         
+//        $update_data=array(
+//            'number_plate'=>'1234',
+//            'fitness_certification_number'=>'1234',
+//            'vehicle_insurance_number'=>'1234',
+//            'vehicle_permit_number'=>'1234',
+//     
+//                          );
+
+        $unique_id=$this->db->update('user_vehicles',$update_data,array('id'=>$vehicle_id));
+         
+         
+  // echo $this->db->last_query();exit;
+      
+        if ($vehicle_id == 0) {
+            $response = array('status' => false, 'message' => 'Vehicle Details Updation Failed!','response'=>'');
+        } else {
+            $response = array('status' => true, 'message' => 'Vehicle Details Updated Successfully!','response'=>$vehicle_id);
+        }
+        TrackResponse($user_input, $response);
+        $this->response($response);
+
+    }
+    
+      // driver app edit vehicle step 3
+      
+     function update_driver_vehicles_step3_post() {
+        $response = array('status' => false, 'message' => '');
+        $user_input = $this->client_request;
+        extract($user_input);
+
+        $required_params = array('vehicle_id' => 'Vehicle ID',  'user_id' => 'User ID');
+        foreach ($required_params as $key => $value) {
+            if (!$user_input[$key]) {
+                $response = array('status' => false, 'message' => $value . ' is required');
+                TrackResponse($user_input, $response);
+                $this->response($response);
+            }
+        }
+
+        //echo '<pre>';print_r($vehicle_images);exit;
+        foreach($vehicle_images as $vehicle_img){
+        
+
+            $insert=array(
+                'user_id'=>$user_id,
+                'vehicle_id'=>$vehicle_id,
+                'vehicle_image'=>'/storage/VehicleImages/'.$vehicle_img,
+                'created_date'=>date('Y-m-d H:i:s')
+                        );
+            $this->db->insert('vehicle_images',$insert);
+            $insert_id=$this->db->insert_id();
+        }
+
+        if ($insert_id == 0) {
+            $response = array('status' => false, 'message' => 'Vehicle images Updated  Failed!','response'=>'');
+        } else {
+            $response = array('status' => true, 'message' => 'Vehicle images Updated Successfully!','response'=>true);
+        }
+        TrackResponse($user_input, $response);
+        $this->response($response);
+
 
     }
 
