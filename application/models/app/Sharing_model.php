@@ -1668,7 +1668,7 @@ class Sharing_model extends CI_Model {
         $this->db->join('vehicle_models', 'vehicle_models.id = user_vehicles.model_id');
         $this->db->select('users.first_name, users.last_name, users.profile_pic, orders.*, orders.id as order_id, vehicle_models.title as model, vehicle_makes.title as vehicle_make');
         $orders = $this->db->get('orders');
-        //echo $this->db->last_query();exit;
+      //  echo $this->db->last_query();exit;
         //echo $orders->num_rows();
         if ($orders->num_rows() > 0) {
             return $orders->result_array();
