@@ -1149,10 +1149,23 @@ class Sharing extends REST_Controller {
             'distance' => $distance['distance'],
             'time' => $distance['time']
         );
+        
+        
+        
+        $order_details2=$this->db->query("select response from sample_responses where id=4 ")->row_array();
+
+        
+        
         if (empty($response)) {
             $response = array('status' => false, 'message' => 'No data available!');
         } else {
-            $response = array('status' => true, 'message' => 'Data fetched Successfully!', 'response' => $final_data);
+           // $response = array('status' => true, 'message' => 'Data fetched Successfully!', 'response' => $final_data);
+            
+            
+              $response = array('status' => true, 'message' => 'Data fetched Successfully!', 'response' => array(json_decode($order_details2['response'])));
+
+            
+            
         }
         TrackResponse($user_input, $response);
         $this->response($response);
@@ -1188,10 +1201,20 @@ class Sharing extends REST_Controller {
             }
         }
         $response = $this->sharing_model->user_cancelled_orders($user_id);
+        
+        
+       $order_details2=$this->db->query("select response from sample_responses where id=5 ")->row_array();
+
+
         if (empty($response)) {
             $response = array('status' => false, 'message' => 'No data available!');
         } else {
-            $response = array('status' => true, 'message' => 'Data fetched Successfully!', 'response' => $response);
+            // $response = array('status' => true, 'message' => 'Data fetched Successfully!', 'response' => $response);
+            
+                $response = array('status' => true, 'message' => 'Data fetched Successfully!', 'response' => array(json_decode($order_details2['response'])));
+
+            
+            
         }
         TrackResponse($user_input, $response);
         $this->response($response);
@@ -1228,10 +1251,16 @@ class Sharing extends REST_Controller {
             }
         }
         $response = $this->sharing_model->rides_offered($user_id);
+        
+      $order_details2=$this->db->query("select response from sample_responses where id=6 ")->row_array();
+
+        
         if (empty($response)) {
             $response = array('status' => false, 'message' => 'No data available!');
         } else {
-            $response = array('status' => true, 'message' => 'Data fetched Successfully!', 'response' => $response);
+          //  $response = array('status' => true, 'message' => 'Data fetched Successfully!', 'response' => $response);
+            
+             $response = array('status' => true, 'message' => 'Data fetched Successfully!', 'response' => array(json_decode($order_details2['response'])));
         }
         TrackResponse($user_input, $response);
         $this->response($response);
@@ -1267,10 +1296,22 @@ class Sharing extends REST_Controller {
             }
         }
         $response = $this->sharing_model->rides_offered_later($user_id);
+        
+        
+              $order_details2=$this->db->query("select response from sample_responses where id=6 ")->row_array();
+
+
+        
+        
+        
         if (empty($response)) {
             $response = array('status' => false, 'message' => 'No data available!');
         } else {
-            $response = array('status' => true, 'message' => 'Data fetched Successfully!', 'response' => $response);
+           // $response = array('status' => true, 'message' => 'Data fetched Successfully!', 'response' => $response);
+            
+             $response = array('status' => true, 'message' => 'Data fetched Successfully!', 'response' => array(json_decode($order_details2['response'])));
+            
+            
         }
         TrackResponse($user_input, $response);
         $this->response($response);
