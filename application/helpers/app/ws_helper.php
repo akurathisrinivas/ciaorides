@@ -68,3 +68,16 @@ if (!function_exists('VenueTypeName_By_ID')) {
     }
 
 }
+
+
+if (!function_exists('Trip_ID')) {
+
+    function Trip_ID() {
+
+        $result= mt_rand(100000, 999999);
+        return $result;
+    }
+
+}
+
+

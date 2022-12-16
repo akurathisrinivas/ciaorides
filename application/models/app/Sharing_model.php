@@ -2109,5 +2109,14 @@ class Sharing_model extends CI_Model {
 
     
 
+    public function getUserVehicles($user_id){
+
+        $query="select uv.*,vm.title as making_type,vmm.title as model_type from user_vehicles uv left join vehicle_makes vm on vm.id=uv.make_id left join vehicle_models vmm on vmm.id=uv.model_id where uv.user_id='$user_id' ";
+        $result=$this->db->query($query)->result_array();
+        return $result;
+
+    }
+
+
 
 }?>

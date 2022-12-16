@@ -1411,6 +1411,49 @@ class Sharing extends REST_Controller {
         TrackResponse($user_input, $response);
         $this->response($response);
     }
+
+    /*
+     *  User Vehicles Fetch 
+     */
+
+    function user_vehicles_post() {
+        $response = array('status' => false, 'message' => '', 'response' => array());
+        $user_input = $this->client_request;
+        extract($user_input);
+//        try {
+//            JWT::decode($token, 'secret_server_key');
+//            $token_status = "Success";
+//        } catch (Exception $e) {
+//            $token_status = $e->getmessage();
+//        }
+//        if ($token_status != "Success") {
+//            $response = array('status' => false, 'message' => 'Token Miss Match!');
+//            TrackResponse($user_input, $response);
+//            $this->response($response);
+//        }
+        $required_params = array('user_id' => "User ID");
+        foreach ($required_params as $key => $value) {
+            if (!$user_input[$key]) {
+                $response = array('status' => false, 'message' => $value . ' is required');
+                TrackResponse($user_input, $response);
+                $this->response($response);
+            }
+        }
+        
+        
+        $response=$this->sharing_model->getUserVehicles($user_id);
+        
+        
+        if (empty($response)) {
+            $response = array('status' => false, 'message' => 'No data available!');
+        } else {
+           $response = array('status' => true, 'message' => 'Data fetched Successfully!', 'response' => $response);
+        }
+
+        TrackResponse($user_input, $response);
+        $this->response($response);
+    }
+    
     
 
 
