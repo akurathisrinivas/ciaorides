@@ -409,7 +409,95 @@ class Driver1 extends REST_Controller {
     }
 
 
+    function pickup_ride_post() {
+        $response = array('status' => false, 'message' => '');
+        $user_input = $this->client_request;
+        extract($user_input);
 
+        /*try {
+            JWT::decode($token, 'secret_server_key');
+            $token_status = "Success";
+        } catch (Exception $e) {
+            $token_status = $e->getmessage();
+        }
+        if ($token_status != "Success") {
+            $response = array('status' => false, 'message' => 'Token Miss Match!');
+            TrackResponse($user_input, $response);
+            $this->response($response);
+        }*/
+
+        $required_params = array('order_id' => "Order ID", 'rider_id' => "Rider ID", 'vehicle_id' => "Vehicle ID");
+        foreach ($required_params as $key => $value) {
+            if (!$user_input[$key]) {
+                $response = array('status' => false, 'message' => $value . ' is required');
+                TrackResponse($user_input, $response);
+                $this->response($response);
+            }
+        }
+        
+        $data = array(
+            'rider_id'=>$rider_id,
+            'vehicle_id'=>$vehicle_id,
+            'status'=>'started',
+            'driver_status' => 'started',
+            'modified_on' => date('Y-m-d H:i:s')
+        );
+
+        $update_user = update_table('taxi_orders', $data, array('id' => $order_id));
+
+        $order=get_table_row('taxi_orders',array('id'=>$order_id));
+
+        $trip_id = Trip_ID(); 
+       
+        $amount_per_head=round(($order['amount']/$order['seats_required']),1);
+
+        $insert_ride=array(
+                        
+                        'trip_id'=>$trip_id,
+                        'type'=>'taxi',
+                        'user_id'=>$order['user_id'],
+                        'vehicle_id'=>$order['vehicle_id'],
+                        'from_lat'=>$order['from_lat'],
+                        'from_lng'=>$order['from_lng'],
+                        'from_address'=>$order['from_address'],
+                        'to_lat'=>$order['to_lat'],
+                        'to_lng'=>$order['to_lng'],
+                        'to_address'=>$order['to_address'],
+                        'mode'=>$order['mode'],
+                        'vehicle_type'=>$order['vehicle_type'],
+                        'gender'=>$order['gender'],
+                        'seats'=>$order['seats_required'],
+                        'seats_available'=>$seats_available,
+                        'trip_distance'=>$order['trip_distance'],
+                        'gender'=>$order['gender'],
+                        'ride_type'=>'now',
+                        'amount_per_head'=>$amount_per_head,
+                        'ride_time'=>date('Y-m-d H:i:s'),
+                        'middle_seat_empty'=>$middle_seat_empty,
+                        'status'=>'ongoing',
+                        'driver_status'=>'Started',
+                        'created_on'=>date('Y-m-d H:i:s')
+                          );
+        $this->db->insert('rides',$insert_ride);
+        $ride_id=$this->db->insert_id();
+
+        $up_data=array('ride_id'=>$ride_id);
+        $update_rider = update_table('taxi_orders', $up_data, array('id' => $order_id));
+        //echo $this->db->last_query();
+        if ($update_user === FALSE) {
+            $response = array('status' => false, 'message' => 'Trip not started!');
+        } else {
+            $orders = $this->ws_model->get_ride_orders($ride_id);
+            if (!empty($orders)) {
+                foreach ($orders as $order) {
+                    $this->ws_model->send_push_notification('Trip started sucessfully!', 'user', $order['user_id'], 'ride_started', $order['order_id'], '', '', $order['vehicle_id'], $ride_id, $order['mode'], $order['ride_type']);
+                }
+            }
+            $response = array('status' => true, 'message' => 'Trip started sucessfully!');
+        }
+        TrackResponse($user_input, $response);
+        $this->response($response);
+    }
 
 
 }
