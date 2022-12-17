@@ -2070,9 +2070,6 @@ location yet.!", 'distance' => number_format($km, 2),  'response' => NULL);
         $this->response($response);
     }
     
-    
-    
-
     /*
      * 	Update Profile Picture New Mohammad
      */
