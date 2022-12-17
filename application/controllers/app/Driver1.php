@@ -472,6 +472,7 @@ class Driver1 extends REST_Controller {
                         'gender'=>$order['gender'],
                         'ride_type'=>'now',
                         'amount_per_head'=>$amount_per_head,
+                        'ride_start_time'=>date('Y-m-d H:i:s'),
                         'ride_time'=>date('Y-m-d H:i:s'),
                         'middle_seat_empty'=>$middle_seat_empty,
                         'status'=>'ongoing',
@@ -497,6 +498,123 @@ class Driver1 extends REST_Controller {
         }
         TrackResponse($user_input, $response);
         $this->response($response);
+    }
+
+
+    /*
+     *  Complete Ride
+     */
+
+    public function complete_ride_post(){
+
+        $response = array('status' => false, 'message' => '', 'response' => array());
+        $user_input = $this->client_request;
+        extract($user_input);
+
+        /*try {
+            JWT::decode($token, 'secret_server_key');
+            $token_status = "Success";
+        } catch (Exception $e) {
+            $token_status = $e->getmessage();
+        }
+        if ($token_status != "Success") {
+            $response = array('status' => false, 'message' => 'Token Miss Match!');
+            TrackResponse($user_input, $response);
+            $this->response($response);
+        }
+        */        
+        $required_params = array('order_id' => "Order ID", 'user_id' => "User ID", 'booking_id' => "Booking ID", 'amount' => "Amount", 'rider_id' => "Rider ID");
+        foreach ($required_params as $key => $value) {
+            if (!$user_input[$key]) {
+                $response = array('status' => false, 'message' => $value . ' is required');
+                TrackResponse($user_input, $response);
+                $this->response($response);
+            }
+        }
+
+        $data = array(
+            'status' => 'completed',
+            'ride_end_time' => date('Y-m-d H:i:s'),
+            'modified_on' => date('Y-m-d H:i:s')
+        );
+        //var_dump($data);
+        $unique_id = update_table('taxi_orders', $data, array('id' => $order_id));
+
+        if ($unique_id == false) {
+            $response = array('status' => false, 'message' => 'Some Problem found while Completing the Ride!');
+        } else {
+            $order_details = get_table_row('taxi_orders', array('id' => $order_id));
+            $message = "Your Booking with Booking ID: " . $booking_id . " has been completed successfully!";
+            $this->ws_model->send_push_notification($message, 'user', $user_id, 'complete_ride', $order_id, $amount, $rider_id, $order_details['vehicle_id'], $order_details['ride_id'], $order_details['mode'], $order_details['ride_type']);
+            $response = array('status' => true, 'message' => 'Ride completed Successfully!');
+        }
+
+
+        TrackResponse($user_input, $response);
+        $this->response($response);
+
+    }
+
+
+    /*
+     *  Submit Review
+     */
+
+    public function submit_review_post(){
+
+        $response = array('status' => false, 'message' => '', 'response' => array());
+        $user_input = $this->client_request;
+        extract($user_input);
+
+        /*try {
+            JWT::decode($token, 'secret_server_key');
+            $token_status = "Success";
+        } catch (Exception $e) {
+            $token_status = $e->getmessage();
+        }
+        if ($token_status != "Success") {
+            $response = array('status' => false, 'message' => 'Token Miss Match!');
+            TrackResponse($user_input, $response);
+            $this->response($response);
+        }
+        */        
+        $required_params = array('user_id' => "User ID",'rider_id'=>"Rider id",'order_id'=>"Order id",'rating'=> "Rating");
+        foreach ($required_params as $key => $value) {
+            if (!$user_input[$key]) {
+                $response = array('status' => false, 'message' => $value . ' is required');
+                TrackResponse($user_input, $response);
+                $this->response($response);
+            }
+        }
+
+        $insert_rating=array(
+                                'order_id'=>$order_id,
+                                'from_user_id'=>$user_id,
+                                'user_id'=>$rider_id,
+                                'ratings'=>$rating,
+                                'reviews'=>$review,
+                                'created_on'=>date('Y-m-d H:i:s')
+                            );
+        $last_id=insert_table('user_ratings',$insert_rating);
+
+        $query="select ROUND(AVG(ratings),1) as avg_rating from user_ratings where user_id='$rider_id' GROUP BY user_id";
+        $rat=$this->db->query($query)->row_array();
+
+        $update_avg=array('average_rating'=>$rat['avg_rating']);
+
+        $unique_id = update_table('users', $update_avg, array('id' => $rider_id));
+
+        if ($unique_id == false) {
+            $response = array('status' => false, 'message' => 'Some Problem found while Submit review!');
+        } else {
+           
+            $response = array('status' => true, 'message' => 'Review submitted Successfully!');
+        }
+
+
+        TrackResponse($user_input, $response);
+        $this->response($response);
+
     }
 
 
