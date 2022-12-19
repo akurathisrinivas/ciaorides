@@ -3,7 +3,7 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class DriverMenuitems_model extends CI_Model {
+class Drivermenuitems_model extends CI_Model {
 
 
 function get_rides_taken($user_id){
