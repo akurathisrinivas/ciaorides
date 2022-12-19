@@ -29,6 +29,7 @@ class Sharing extends REST_Controller {
         $this->client_request = new stdClass();
         $this->client_request = json_decode(file_get_contents('php://input', true));
         $this->client_request = json_decode(json_encode($this->client_request), true);
+        
     }
 
 
@@ -1455,6 +1456,5 @@ class Sharing extends REST_Controller {
     }
     
     
-
 
 }
