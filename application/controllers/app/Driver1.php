@@ -456,6 +456,7 @@ class Driver1 extends REST_Controller {
                         'trip_id'=>$trip_id,
                         'type'=>'taxi',
                         'user_id'=>$order['user_id'],
+                        'rider_id'=>$rider_id,
                         'vehicle_id'=>$order['vehicle_id'],
                         'from_lat'=>$order['from_lat'],
                         'from_lng'=>$order['from_lng'],
@@ -609,6 +610,53 @@ class Driver1 extends REST_Controller {
         } else {
            
             $response = array('status' => true, 'message' => 'Review submitted Successfully!');
+        }
+
+
+        TrackResponse($user_input, $response);
+        $this->response($response);
+
+    }
+
+
+    /*
+     *  My Rides
+     */
+
+    public function my_rides_post(){
+
+        $response = array('status' => false, 'message' => '', 'response' => array());
+        $user_input = $this->client_request;
+        extract($user_input);
+
+        /*try {
+            JWT::decode($token, 'secret_server_key');
+            $token_status = "Success";
+        } catch (Exception $e) {
+            $token_status = $e->getmessage();
+        }
+        if ($token_status != "Success") {
+            $response = array('status' => false, 'message' => 'Token Miss Match!');
+            TrackResponse($user_input, $response);
+            $this->response($response);
+        }
+        */        
+        $required_params = array('rider_id' => "Rider ID");
+        foreach ($required_params as $key => $value) {
+            if (!$user_input[$key]) {
+                $response = array('status' => false, 'message' => $value . ' is required');
+                TrackResponse($user_input, $response);
+                $this->response($response);
+            }
+        }
+
+        $result=$this->driver1_model->getMyRides($rider_id);
+
+        if (empty($result)) {
+            $response = array('status' => false, 'message' => 'No rides found!','reponse'=> $result);
+        } else {
+           
+            $response = array('status' => true, 'message' => 'Data fetched Successfully!','reponse'=> $result);
         }
 
 
