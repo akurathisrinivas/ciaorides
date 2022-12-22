@@ -245,4 +245,13 @@ class Driver1_model extends CI_Model {
         return new ArrayObject();
     }
 
+    function getMyRides($rider_id){
+
+      $query="select u.first_name,u.last_name,ROUND((r.amount_per_head*r.seats),1) as total_amount,r.ride_time,r.from_address,r.to_address from rides r inner join users u on u.id=r.user_id where r.rider_id='$rider_id' ";
+      $result=$this->db->query($query)->result_array();
+      return $result;
+    }
+
+
+
 }?>
