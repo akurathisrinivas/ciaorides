@@ -317,7 +317,11 @@ public function checknull($array=array()){
   
 
 }
-
     
+    public function testing(){
+        
+        echo 'Checking';
+        
+    }
 
 }?>
