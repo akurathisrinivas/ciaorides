@@ -8,7 +8,6 @@ class Driver_menuitems extends REST_Controller {
 
 
 	protected $client_request = NULL;
-
     function __construct() {
         parent::__construct();
         date_default_timezone_set("Asia/Kolkata");
@@ -18,7 +17,7 @@ class Driver_menuitems extends REST_Controller {
 
         $this->load->helper('app/ws_helper');
         $this->load->model('app/ws_model');
-        $this->load->model('app/drivermenuitems_model');
+        $this->load->model('app/Drivermenuitems_model');
         $this->load->model('email_model');
         $this->load->helper('app/jwt_helper');
 
