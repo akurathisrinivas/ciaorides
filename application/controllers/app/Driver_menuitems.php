@@ -1237,6 +1237,13 @@ class Driver_menuitems extends REST_Controller {
 
 
     }
+    
+    
+    function test(){
+        
+        echo 'Driver Menu Working';
+        
+    }
 
     
     
