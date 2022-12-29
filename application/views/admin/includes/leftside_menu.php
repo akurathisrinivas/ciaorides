@@ -24,6 +24,141 @@
                     <div class="nav-item has-sub  <?= ($uri == 'all_users' || $uri == "user_bank_details" || $uri == "user_feedback" || $uri == "user_ratings" ) ? 'active open' : '' ?>">
                         <a href="javascript:void(0)"><i class="ik ik-users"></i><span>Users Management </span></a>
                         <div class="submenu-content">
+                            <a href="" class="menu-item  <?= ($uri == 'all_users' ) ? 'active' : '' ?>"><span class="fa fa-users  active "></span>&nbsp;&nbsp; Taxi Users</a>
+                            <a href="" class="menu-item   <?= ($uri == 'user_bank_details' ) ? 'active' : '' ?>"><span class="fa fa-users  active"></span>&nbsp;&nbsp; Sharing Users </a>
+                            <a href="" class="menu-item   <?= ($uri == 'user_feedback' ) ? 'active' : '' ?>"> <span class="fa fa-users  active"></span>&nbsp;&nbsp; Drivers</a>
+                       
+                        </div>
+                    </div>
+                    
+                    
+                 <div class="nav-lavel">Vehicle Management</div>
+                    <div class="nav-item has-sub  <?= ($uri == 'all_users' || $uri == "user_bank_details" || $uri == "user_feedback" || $uri == "user_ratings" ) ? 'active open' : '' ?>">
+                        <a href="javascript:void(0)"><i class="fa fa-car"></i><span>Vehicle Management</span></a>
+                        <div class="submenu-content">
+                            <a href="" class="menu-item  <?= ($uri == 'all_users' ) ? 'active' : '' ?>"><span class="fa fa-car  active "></span>&nbsp;&nbsp; Brands</a>
+                            <a href="" class="menu-item   <?= ($uri == 'user_bank_details' ) ? 'active' : '' ?>"><span class="fa fa-car  active"></span>&nbsp;&nbsp; Models </a>
+                        
+                       
+                        </div>
+                    </div>  
+                    
+                    
+                    <div class="nav-lavel">Taxi Management</div>
+                    <div class="nav-item has-sub  <?= ($uri == 'all_users' || $uri == "user_bank_details" || $uri == "user_feedback" || $uri == "user_ratings" ) ? 'active open' : '' ?>">
+                        <a href="javascript:void(0)"><i class="fa fa-car"></i><span>Taxi Management</span></a>
+                        <div class="submenu-content">
+                            <a href="" class="menu-item  <?= ($uri == 'all_users' ) ? 'active' : '' ?>"><span class="fa fa-car  active "></span>&nbsp;&nbsp; Taxi Rides</a>
+                            <a href="" class="menu-item   <?= ($uri == 'user_bank_details' ) ? 'active' : '' ?>"><span class="fa fa-car  active"></span>&nbsp;&nbsp; Taxi Bookings </a>  
+                            <a href="" class="menu-item   <?= ($uri == 'user_bank_details' ) ? 'active' : '' ?>"><span class="fa fa-car  active"></span>&nbsp;&nbsp; Canceled By User </a>   
+                            <a href="" class="menu-item   <?= ($uri == 'user_bank_details' ) ? 'active' : '' ?>"><span class="fa fa-car  active"></span>&nbsp;&nbsp; Canceled by Driver </a>
+                        
+                       
+                        </div>
+                    </div>
+                    
+                    
+                 <div class="nav-lavel">Inter City Management</div>
+                    <div class="nav-item has-sub  <?= ($uri == 'all_users' || $uri == "user_bank_details" || $uri == "user_feedback" || $uri == "user_ratings" ) ? 'active open' : '' ?>">
+                        <a href="javascript:void(0)"><i class="fa fa-car"></i><span>Inter City Management</span></a>
+                        <div class="submenu-content">
+                            <a href="" class="menu-item  <?= ($uri == 'all_users' ) ? 'active' : '' ?>"><span class="fa fa-car  active "></span>&nbsp;&nbsp; Bookings</a>
+                            <a href="" class="menu-item   <?= ($uri == 'user_bank_details' ) ? 'active' : '' ?>"><span class="fa fa-car  active"></span>&nbsp;&nbsp; Ongoing Rides </a>  
+                            <a href="" class="menu-item   <?= ($uri == 'user_bank_details' ) ? 'active' : '' ?>"><span class="fa fa-car  active"></span>&nbsp;&nbsp; Scheduled Rides </a>   
+                            <a href="" class="menu-item   <?= ($uri == 'user_bank_details' ) ? 'active' : '' ?>"><span class="fa fa-car  active"></span>&nbsp;&nbsp; Completed Rides </a> 
+                            <a href="" class="menu-item   <?= ($uri == 'user_bank_details' ) ? 'active' : '' ?>"><span class="fa fa-car  active"></span>&nbsp;&nbsp; Cancel By user </a>
+                        
+                       
+                        </div>
+                    </div>
+                             
+                   <div class="nav-lavel">Sharing Management</div>
+                      <div class="nav-item has-sub  <?= ($uri == 'all_users' || $uri == "user_bank_details" || $uri == "user_feedback" || $uri == "user_ratings" ) ? 'active open' : '' ?>">
+                        <a href="javascript:void(0)"><i class="fa fa-car"></i><span>Sharing Management</span></a>
+                        <div class="submenu-content">
+                            <a href="" class="menu-item  <?= ($uri == 'all_users' ) ? 'active' : '' ?>"><span class="fa fa-car  active "></span>&nbsp;&nbsp; All Rides</a>
+                            <a href="" class="menu-item   <?= ($uri == 'user_bank_details' ) ? 'active' : '' ?>"><span class="fa fa-car  active"></span>&nbsp;&nbsp; Ongoing Rides </a>  
+                            <a href="" class="menu-item   <?= ($uri == 'user_bank_details' ) ? 'active' : '' ?>"><span class="fa fa-car  active"></span>&nbsp;&nbsp; Bookings/Scheduled Rides </a>   
+                            <a href="" class="menu-item   <?= ($uri == 'user_bank_details' ) ? 'active' : '' ?>"><span class="fa fa-car  active"></span>&nbsp;&nbsp; Completed Rides </a> 
+                            <a href="" class="menu-item   <?= ($uri == 'user_bank_details' ) ? 'active' : '' ?>"><span class="fa fa-car  active"></span>&nbsp;&nbsp; Canceled By user </a>
+                            <a href="" class="menu-item   <?= ($uri == 'user_bank_details' ) ? 'active' : '' ?>"><span class="fa fa-car  active"></span>&nbsp;&nbsp; Canceled By rider </a>  
+                            <a href="" class="menu-item   <?= ($uri == 'user_bank_details' ) ? 'active' : '' ?>"><span class="fa fa-car  active"></span>&nbsp;&nbsp; Banking Details </a>   
+                            <a href="" class="menu-item   <?= ($uri == 'user_bank_details' ) ? 'active' : '' ?>"><span class="fa fa-car  active"></span>&nbsp;&nbsp; Pending Payments </a> 
+                            <a href="" class="menu-item   <?= ($uri == 'user_bank_details' ) ? 'active' : '' ?>"><span class="fa fa-car  active"></span>&nbsp;&nbsp; Paid Payments </a>
+                        
+                       
+                        </div>
+                    </div>
+                               
+ 
+    
+          <div class="nav-lavel">Driver Management</div>
+                      <div class="nav-item has-sub  <?= ($uri == 'all_users' || $uri == "user_bank_details" || $uri == "user_feedback" || $uri == "user_ratings" ) ? 'active open' : '' ?>">
+                        <a href="javascript:void(0)"><i class="fa fa-car"></i><span>Driver Management</span></a>
+                        <div class="submenu-content">
+                            <a href="" class="menu-item  <?= ($uri == 'all_users' ) ? 'active' : '' ?>"><span class="fa fa-car  active "></span>&nbsp;&nbsp; Bank Details</a>
+                            <a href="" class="menu-item   <?= ($uri == 'user_bank_details' ) ? 'active' : '' ?>"><span class="fa fa-car  active"></span>&nbsp;&nbsp; Pending Payments  </a>  
+                            <a href="" class="menu-item   <?= ($uri == 'user_bank_details' ) ? 'active' : '' ?>"><span class="fa fa-car  active"></span>&nbsp;&nbsp; Paid Payments </a>   
+                      
+                        </div>
+                    </div>
+                          
+                    
+                  <div class="nav-lavel">Amount Calculations</div>
+                      <div class="nav-item has-sub  <?= ($uri == 'all_users' || $uri == "user_bank_details" || $uri == "user_feedback" || $uri == "user_ratings" ) ? 'active open' : '' ?>">
+                        <a href="javascript:void(0)"><i class="ik ik-dollar-sign"></i><span>Amount Calculations</span></a>
+                        <div class="submenu-content">
+                            <a href="" class="menu-item  <?= ($uri == 'all_users' ) ? 'active' : '' ?>"><span class="fa fa-car  active "></span>&nbsp;&nbsp; Taxi</a>
+                            <a href="" class="menu-item   <?= ($uri == 'user_bank_details' ) ? 'active' : '' ?>"><span class="fa fa-car  active"></span>&nbsp;&nbsp; Sharing  </a>  
+                 
+                      
+                        </div>
+                    </div>
+                    
+                    
+  
+  
+
+                      <div class="nav-lavel">Feedbacks & Ratings</div>
+                      <div class="nav-item has-sub  <?= ($uri == 'all_users' || $uri == "user_bank_details" || $uri == "user_feedback" || $uri == "user_ratings" ) ? 'active open' : '' ?>">
+                        <a href="javascript:void(0)"><i class="ik ik-package"></i><span>Feedbacks & Ratings</span></a>
+                        <div class="submenu-content">
+                            <a href="" class="menu-item  <?= ($uri == 'all_users' ) ? 'active' : '' ?>"><span class="fa fa-car  active "></span>&nbsp;&nbsp; Sharing Users</a>
+                            <a href="" class="menu-item   <?= ($uri == 'user_bank_details' ) ? 'active' : '' ?>"><span class="fa fa-car  active"></span>&nbsp;&nbsp; Drivers  </a>  
+                 
+                      
+                        </div>
+                    </div>
+                    
+                  <div class="nav-lavel">Others</div>
+                      <div class="nav-item has-sub  <?= ($uri == 'all_users' || $uri == "user_bank_details" || $uri == "user_feedback" || $uri == "user_ratings" ) ? 'active open' : '' ?>">
+                        <a href="javascript:void(0)"><i class="ik ik-command"></i><span>Others</span></a>
+                        <div class="submenu-content">
+                            <a href="" class="menu-item  <?= ($uri == 'all_users' ) ? 'active' : '' ?>"><span class="ik ik-message-circle"></span>&nbsp;&nbsp; Push notifications</a>
+                            <a href="" class="menu-item   <?= ($uri == 'user_bank_details' ) ? 'active' : '' ?>"><span class="ik ik-phone-call  active"></span>&nbsp;&nbsp; Emergency Contact  </a>  
+                            <a href="" class="menu-item  <?= ($uri == 'all_users' ) ? 'active' : '' ?>"><span class="fa fa-car  active "></span>&nbsp;&nbsp; Admin Chat</a>
+                            <a href="" class="menu-item   <?= ($uri == 'user_bank_details' ) ? 'active' : '' ?>"><span class="fa fa-car  active"></span>&nbsp;&nbsp; Support  </a>  
+                 
+                      
+                        </div>
+                    </div>
+                    
+                    
+                   
+                    <div class="nav-item  <?= ($uri == 'logout' ) ? 'active' : '' ?>">
+                        <a href=""><i class="ik ik-cast"></i><span>Logout </span></a>
+                    </div>
+
+
+                    
+                    
+                    
+                    
+<!--
+                  <div class="nav-lavel">User Management</div>
+                    <div class="nav-item has-sub  <?= ($uri == 'all_users' || $uri == "user_bank_details" || $uri == "user_feedback" || $uri == "user_ratings" ) ? 'active open' : '' ?>">
+                        <a href="javascript:void(0)"><i class="ik ik-users"></i><span>Users Management </span></a>
+                        <div class="submenu-content">
                             <a href="<?= base_url('admin/register/all_users') ?>" class="menu-item  <?= ($uri == 'all_users' ) ? 'active' : '' ?>"><span class="fa fa-users  active "></span>&nbsp;&nbsp; All Users</a>
                             <a href="<?= base_url('admin/register/user_bank_details') ?>" class="menu-item   <?= ($uri == 'user_bank_details' ) ? 'active' : '' ?>"><span class="ik ik-database"></span>&nbsp;&nbsp; Bank  Details </a>
                             <a href="<?= base_url('admin/register/user_feedback') ?>" class="menu-item   <?= ($uri == 'user_feedback' ) ? 'active' : '' ?>"> <span class="ik ik-message-square"></span>&nbsp;&nbsp; Feedback Users</a>
@@ -31,7 +166,7 @@
                         </div>
                     </div>
                     <div class="nav-lavel">Cars Management</div>
-                    <!--<div class="nav-lavel">Vehicle Management</div>-->
+                    <div class="nav-lavel">Vehicle Management</div>
                     <div class="nav-item has-sub <?= ($uri == 'vehicle_makes' || $uri == "vehicle_models") ? 'active open' : '' ?>">
                         <a href="#"><i class="ik ik-award"></i><span>Brand  & Models</span></a>
                         <div class="submenu-content">
@@ -116,6 +251,10 @@
                     <div class="nav-item  <?= ($uri == 'support' ) ? 'active' : '' ?>">
                         <a href="<?= base_url('admin/register/support') ?>"><i class="ik ik-cast"></i><span>Support </span></a>
                     </div>
+                    
+                    
+-->
+                    
                 </nav>
             </div>
         </div>
