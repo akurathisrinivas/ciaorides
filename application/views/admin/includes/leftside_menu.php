@@ -102,7 +102,18 @@
                       
                         </div>
                     </div>
+         <div class="nav-lavel">Roles & Responsibilites</div>
+                      <div class="nav-item has-sub  <?= ($uri == 'roles' || $uri == "add_roles" || $uri == "edit_roles" || $uri == "view_roles" ) ? 'active open' : '' ?>">
+                        <a href="javascript:void(0)"><i class="fa fa-lock"></i><span>Roles & Responsibilites</span></a>
+                        <div class="submenu-content">
+                            <a href="" class="menu-item  <?= ($uri == 'roles' || $uri == "add_roles" || $uri == "edit_roles" || $uri == "view_roles") ? 'active' : '' ?>"><span class="fa fa-lock  active "></span>&nbsp;&nbsp; Roles</a>
+                            <a href="" class="menu-item   <?= ($uri == 'employees' || $uri == "add_employee" || $uri == "edit_employee" || $uri == "view_employee") ? 'active' : '' ?>"><span class="fa fa-users  active"></span>&nbsp;&nbsp;Employees  </a>  
+                               
+                      
+                        </div>
+        </div>
                           
+
                     
                   <div class="nav-lavel">Amount Calculations</div>
                       <div class="nav-item has-sub  <?= ($uri == 'all_users' || $uri == "user_bank_details" || $uri == "user_feedback" || $uri == "user_ratings" ) ? 'active open' : '' ?>">
