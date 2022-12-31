@@ -847,4 +847,414 @@ class Common_model extends CI_Model
 		}
 		return false;
 	}
+
+
+	public function module_name(){
+        return $modules_name = array(
+            'dashboard' => 'Dashboard',
+            'taxi_users'=> 'Taxi Users',
+            'sharing_users'=> 'Sharing Users',
+            'drivers'=> 'Drivers',
+            'vehicle_brands'=> 'Vehicle Brands',
+            'vehicle_models'=> 'Vehicle Models',
+            'students' => 'Students',
+            'student_payments'=>'Student Payments',
+            'bulk_students' => 'Bulk Students',
+            'overview_details' => 'OVERVIEW Details',
+            'available_funds' => 'Available Funds',
+            'transfer_funds' => 'Transfer Funds',
+            'payment_approvals' => 'Payment Approvals',
+           // 'general_students' => 'General Students',
+            'all_registered_students' => 'All Registered Students',
+            'expenses' => 'Expenses',
+            'expense_approval' => 'Expense Approval',
+            'categories' => 'Categories',
+            'advance_release' => 'Advance Release',
+            'states' => 'States',
+            'organisations' => 'Organisations',
+            'centers' => 'Centers',
+            'courses' => 'Courses',
+            'batchs' => 'Batchs',
+            'attachment_groups' => 'Attachment Groups',
+            'attachments' => 'Attachments',
+            'payment_modes' => 'Payment Modes',
+             'colleges' => 'Colleges',
+             'discount_schemes' => 'Discount Schemes',
+             'departments' => 'Departments',
+             'in_stock' => 'In stock',
+             'schedule' => 'Schedule',
+             'events' => 'Events',
+             'special_attendance' => 'Special Attendance',
+             'roles' => 'Roles',
+             'employees' => 'Employees',
+             );
+    }
+
+
+    public function get_default_responsibilities(){
+        $modules = array(
+            'dashboard' => array(
+                '0' => 'l'
+            ),
+            'taxi_users' => array(
+                '0' => 'l'
+            ),
+
+            'sharing_users' => array(
+                
+                '0' => 'l'
+            ),
+
+            'drivers' => array(
+
+                '0' => 'l',
+                
+            ),
+            'vehicle_brands' => array(
+
+                '0' => 'l',
+                '1' => 'a',
+                '2' => 'e',
+                '3' => 'd',
+                '4' => 's'
+             ),
+            'vehicle_models'=>array(
+                '0' => 'l',
+                '1' => 'a',
+                '2' => 'e',
+                '3' => 'd',
+                '4' => 's'
+             ),
+            
+            
+            'students' => array(
+                '0' => 'l',
+                '1' => 'a',
+                '2' => 'e',
+                '3' => 'd',
+                '4' => 's'
+            ),
+            'student_payments' => array(
+                '0' => 'e',
+            ),
+            'bulk_students' => array(
+                '0' => 'l',
+                '1' => 'a',
+                '2' => 's',
+            ),
+            'overview_details' => array(
+                '0' => 'l',
+               
+            ),                        
+            'available_funds' => array(
+                '0' => 'l',
+                              
+            ),  
+            'transfer_funds' => array(
+                '0' => 'l',
+            ),
+
+            'payment_approvals'  => array(
+                '0' => 'l',
+                '1' => 'e',
+                '2' => 'd',
+                '3' => 's',
+                              
+            ),            
+            /*'general_students' => array(
+                '0' => 'l',
+                '1' => 'a',
+                '2' => 'e',
+                '3' => 'd'
+
+            ),*/
+            'all_registered_students' => array(
+                '0' => 'l',
+                '1' => 'a',
+                '2' => 'e',
+                '3' => 'd'
+            ),
+            'expenses' => array(
+                '0' => 'l',
+                '1' => 'a',
+                '2' => 'e',
+                '3' => 'd',
+                '4' => 's'
+            ),
+            'expense_approval' => array(
+                '0' => 'l',
+                '1' => 'd',
+            ),
+            
+            'categories' => array(
+                '0' => 'l',
+                '1' => 'a',
+                '2' => 'e',
+                '3' => 'd',
+                '4' => 's'
+            
+            ),
+            'advance_release' => array(
+                '0' => 'l',
+                '1' => 'a',
+                '2' => 'e',
+                '3' => 'd',
+                '4' => 's'
+            
+            ),
+            'states' => array(
+                '0' => 'l',
+                '1' => 'a',
+                '2' => 'e',
+                '3' => 'd',
+                '4' => 's'
+            ),
+            'organisations' => array(
+                '0' => 'l',
+                '1' => 'a',
+                '2' => 'e',
+                '3' => 'd',
+                '4' => 's'
+            ),
+            
+            'centers' => array(
+                '0' => 'l',
+                '1' => 'a',
+                '2' => 'e',
+                '3' => 'd',
+                '4' => 's'
+            ),
+            'courses' => array(
+                '0' => 'l',
+                '1' => 'a',
+                '2' => 'e',
+                '3' => 'd',
+                '4' => 's'
+            ),
+
+            
+            'batchs' => array(
+                '0' => 'l',
+                '1' => 'a',
+                '2' => 'e',
+                '3' => 'd',
+                '4' => 's'
+                
+            ),
+
+            'attachment_groups' => array(
+                '0' => 'l',
+                '1' => 'a',
+                '2' => 'e',
+                '3' => 'd',
+                '4' => 's'
+            ),
+
+             'attachments' => array(
+                '0' => 'l',
+                '1' => 'a',
+                '2' => 'e',
+                '3' => 'd',
+                '4' => 's'
+                
+            ),
+
+             'payment_modes' => array(
+                '0' => 'l',
+                '1' => 'a',
+                '2' => 'e',
+                '3' => 'd',
+                '4' => 's'
+                
+            ),
+             'colleges' => array(
+                '0' => 'l',
+                '1' => 'a',
+                '2' => 'e',
+                '3' => 'd',
+                '4' => 's'
+                
+            ),
+             'discount_schemes' => array(
+                '0' => 'l',
+                '1' => 'a',
+                '2' => 'e',
+                '3' => 'd',
+                '4' => 's'
+                
+            ),
+             'departments' => array(
+               '0' => 'l',
+                '1' => 'a',
+                '2' => 'e',
+                '3' => 'd',
+                '4' => 's'
+                
+            ),
+             'in_stock' => array(
+                '0' => 'l',
+                '1' => 'a',
+                '2' => 'e',
+                '3' => 'd',
+                '4' => 's'
+            ),
+             'schedule' => array(
+                '0' => 'l',
+                '1' => 'a',
+                '2' => 'e',
+                '3' => 'd',
+                '4' => 's'
+            ),
+
+            'events' => array(
+                '0' => 'l',
+                '1' => 'a',
+                '2' => 'e',
+                '3' => 'd',
+                '4' => 's'
+            ),
+            'special_attendance' => array(
+                '0' => 'l',
+                '1' => 'a',
+                '2' => 'e',
+                '3' => 'd'
+            ),
+            'roles' => array(
+                '0' => 'l',
+                '1' => 'a',
+                '2' => 'e',
+                '3' => 'd',
+                '4' => 's'
+            ),
+            'employees' => array(
+                '0' => 'l',
+                '1' => 'a',
+                '2' => 'e',
+                '3' => 'd',
+                '4' => 's'
+            ),
+            
+                
+        );
+        return $modules;
+    }
+
+
+    public function module_names(){
+    $modules = array(
+            'Dashboard' => array(
+                'l' => 'View'
+            ),
+            'Taxi Users' => array(
+                'l' => 'View'
+            ),
+            'Sharing Users' => array(
+               'l' => 'View'
+            ),
+
+            'Drivers' => array(
+               'l' => 'View'
+               
+            ),
+
+            'Vehicle Brands' => array(
+               'l' => 'View',
+                'a' => 'Add',
+                'e' => 'Edit',
+                'd' => 'Delete',
+                's' => 'Status',
+            ),
+            
+            'Vehicle Models' => array(
+              'l' => 'View',
+	            'a' => 'Add',
+	            'e' => 'Edit',
+	            'd' => 'Delete',
+	            's' => 'Status',
+            ),
+
+            
+            
+            'Taxi Rides' => array(
+                
+                'l' => 'View',
+                
+            ),
+
+            'Taxi Bookings' => array(
+                'l' => 'View',
+            ),
+            'Taxi Cancel By User' => array(
+                'l' => 'View',
+                
+            ),
+            'Taxi Cancel By Driver' => array(
+                'l' => 'View',              
+            ),
+            'InterCity Bookings' => array(
+                'l' => 'View',              
+            ),
+            'InterCity Ongoing Rides' => array(
+                'l' => 'View',
+            ),
+            'InterCity Scheduled Rides'  => array(
+                'l' => 'View',
+                
+                              
+            ), 
+
+            'InterCity Completed Rides'  => array(
+                'l' => 'View',
+                
+                              
+            ),
+
+            'InterCity Rides Canceled By User'  => array(
+                'l' => 'View',
+                
+                              
+            ),
+
+            'Sharing All Rides'  => array(
+                'l' => 'View',
+                
+                              
+            ),
+            
+           'Roles' => array(
+                'l' => 'View',
+                'a' => 'Add',
+                'e' => 'Edit',
+                'd' => 'Delete',
+                's' => 'Status',
+                
+            ),
+           'Employees' => array(
+                'l' => 'View',
+                'a' => 'Add',
+                'e' => 'Edit',
+                'd' => 'Delete',
+                's' => 'Status',
+                
+            ),
+
+           
+
+          
+
+            );
+
+        return $modules; 
+}
+
+public function module_methods(){
+        return $modules_name = array(
+                'l' => 'List',
+                'a' => 'Add',
+                'e' => 'Edit',
+                'd' => 'Delete',
+                's' => 'Status'
+            );
+    }
+
 }
