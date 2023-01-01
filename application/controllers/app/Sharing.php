@@ -291,7 +291,7 @@ class Sharing extends REST_Controller {
             }
             //print_r($order_details);
           $order_details2=$this->db->query("select response from sample_responses where id=1 ")->row_array();
-          echo '<pre>';print_r($order_details2);exit;
+          //echo '<pre>';print_r($order_details2);exit;
              
             
             // dummy 
