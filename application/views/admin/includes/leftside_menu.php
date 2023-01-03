@@ -21,7 +21,7 @@
                     </div>
 
                     <div class="nav-lavel">User Management</div>
-                    <div class="nav-item has-sub  <?= ($uri == 'all_users' || $uri == "user_bank_details" || $uri == "user_feedback" || $uri == "user_ratings" ) ? 'active open' : '' ?>">
+                    <div class="nav-item has-sub active open <?= ($uri == 'all_users' || $uri == "user_bank_details" || $uri == "user_feedback" || $uri == "user_ratings" ) ? 'active open' : '' ?>">
                         <a href="javascript:void(0)"><i class="ik ik-users"></i><span>Users Management </span></a>
                         <div class="submenu-content">
                             <a href="" class="menu-item  <?= ($uri == 'all_users' ) ? 'active' : '' ?>"><span class="fa fa-users  active "></span>&nbsp;&nbsp; Taxi Drivers</a>
@@ -33,7 +33,7 @@
                     
                     
                  <div class="nav-lavel">Vehicle Management</div>
-                    <div class="nav-item has-sub  <?= ($uri == 'all_users' || $uri == "user_bank_details" || $uri == "user_feedback" || $uri == "user_ratings" ) ? 'active open' : '' ?>">
+                    <div class="nav-item has-sub  active open<?= ($uri == 'all_users' || $uri == "user_bank_details" || $uri == "user_feedback" || $uri == "user_ratings" ) ? 'active open' : '' ?>">
                         <a href="javascript:void(0)"><i class="fa fa-car"></i><span>Vehicle Management</span></a>
                         <div class="submenu-content">
                             <a href="" class="menu-item  <?= ($uri == 'all_users' ) ? 'active' : '' ?>"><span class="fa fa-car  active "></span>&nbsp;&nbsp; Brands</a>
@@ -45,7 +45,7 @@
                      
    
                     <div class="nav-lavel">City Management</div>
-                    <div class="nav-item has-sub  <?= ($uri == 'all_users' || $uri == "user_bank_details" || $uri == "user_feedback" || $uri == "user_ratings" ) ? 'active open' : '' ?>">
+                    <div class="nav-item has-sub  active open<?= ($uri == 'all_users' || $uri == "user_bank_details" || $uri == "user_feedback" || $uri == "user_ratings" ) ? 'active open' : '' ?>">
                         <a href="javascript:void(0)"><i class="fa fa-car"></i><span>City Management</span></a>
                         <div class="submenu-content">
                             <a href="" class="menu-item  <?= ($uri == 'all_users' ) ? 'active' : '' ?>"><span class="fa fa-car  active "></span>&nbsp;&nbsp; Rides (Car, Auto & Bike) </a>
@@ -59,7 +59,7 @@
                     
                     
                  <div class="nav-lavel">Intercity Management</div>
-                    <div class="nav-item has-sub  <?= ($uri == 'all_users' || $uri == "user_bank_details" || $uri == "user_feedback" || $uri == "user_ratings" ) ? 'active open' : '' ?>">
+                    <div class="nav-item has-sub active open <?= ($uri == 'all_users' || $uri == "user_bank_details" || $uri == "user_feedback" || $uri == "user_ratings" ) ? 'active open' : '' ?>">
                         <a href="javascript:void(0)"><i class="fa fa-car"></i><span>Intercity Management</span></a>
                         <div class="submenu-content">
                             <a href="" class="menu-item  <?= ($uri == 'all_users' ) ? 'active' : '' ?>"><span class="fa fa-car  active "></span>&nbsp;&nbsp; Taxi Rides</a>
@@ -74,7 +74,7 @@
                    
                    
                    <div class="nav-lavel">Sharing Management</div>
-                      <div class="nav-item has-sub  <?= ($uri == 'all_users' || $uri == "user_bank_details" || $uri == "user_feedback" || $uri == "user_ratings" ) ? 'active open' : '' ?>">
+                      <div class="nav-item has-sub active open <?= ($uri == 'all_users' || $uri == "user_bank_details" || $uri == "user_feedback" || $uri == "user_ratings" ) ? 'active open' : '' ?>">
                         <a href="javascript:void(0)"><i class="fa fa-car"></i><span>Sharing Management</span></a>
                         <div class="submenu-content">
                             <a href="" class="menu-item  <?= ($uri == 'all_users' ) ? 'active' : '' ?>"><span class="fa fa-car  active "></span>&nbsp;&nbsp; Rides (Car & Bike)</a>
@@ -90,7 +90,7 @@
  
 
          <div class="nav-lavel">Roles & Responsibilites</div>
-                      <div class="nav-item has-sub  <?= ($uri == 'roles' || $uri == "add_roles" || $uri == "edit_roles" || $uri == "view_roles" ) ? 'active open' : '' ?>">
+                      <div class="nav-item has-sub  active open<?= ($uri == 'roles' || $uri == "add_roles" || $uri == "edit_roles" || $uri == "view_roles" ) ? 'active open' : '' ?>">
                         <a href="javascript:void(0)"><i class="fa fa-lock"></i><span>Roles & Responsibilites</span></a>
                         <div class="submenu-content">
                             <a href="<?php echo base_url() ?>admin/Roles/add_roles" class="menu-item  <?= ($uri == 'roles' || $uri == "add_roles" || $uri == "edit_roles" || $uri == "view_roles") ? 'active' : '' ?>"><span class="fa fa-lock  active "></span>&nbsp;&nbsp; Add Role</a>
@@ -105,7 +105,7 @@
 
                     
                   <div class="nav-lavel">Amount Calculations</div>
-                      <div class="nav-item has-sub  <?= ($uri == 'all_users' || $uri == "user_bank_details" || $uri == "user_feedback" || $uri == "user_ratings" ) ? 'active open' : '' ?>">
+                      <div class="nav-item has-sub  active open<?= ($uri == 'all_users' || $uri == "user_bank_details" || $uri == "user_feedback" || $uri == "user_ratings" ) ? 'active open' : '' ?>">
                         <a href="javascript:void(0)"><i class="ik ik-dollar-sign"></i><span>Amount Calculations</span></a>
                         <div class="submenu-content">
                             <a href="" class="menu-item  <?= ($uri == 'all_users' ) ? 'active' : '' ?>"><span class="fa fa-car  active "></span>&nbsp;&nbsp;Taxi Car, Bike & Auto</a>
@@ -115,7 +115,7 @@
                     
                     
                  <div class="nav-lavel">Feedbacks & Ratings</div>
-                      <div class="nav-item has-sub  <?= ($uri == 'all_users' || $uri == "user_bank_details" || $uri == "user_feedback" || $uri == "user_ratings" ) ? 'active open' : '' ?>">
+                      <div class="nav-item has-sub active open <?= ($uri == 'all_users' || $uri == "user_bank_details" || $uri == "user_feedback" || $uri == "user_ratings" ) ? 'active open' : '' ?>">
                         <a href="javascript:void(0)"><i class="ik ik-package"></i><span> Feedbacks & Ratings</span></a>
                         <div class="submenu-content">
                             <a href="" class="menu-item  <?= ($uri == 'all_users' ) ? 'active' : '' ?>"><span class="fa fa-car  active "></span>&nbsp;&nbsp;Taxi Drivers </a>
@@ -126,7 +126,7 @@
                         </div>
                     </div>
            <div class="nav-lavel">Others</div>
-                      <div class="nav-item has-sub  <?= ($uri == 'all_users' || $uri == "user_bank_details" || $uri == "user_feedback" || $uri == "user_ratings" ) ? 'active open' : '' ?>">
+                      <div class="nav-item has-sub  active open <?= ($uri == 'all_users' || $uri == "user_bank_details" || $uri == "user_feedback" || $uri == "user_ratings" ) ? 'active open' : '' ?>">
                         <a href="javascript:void(0)"><i class="ik ik-command"></i><span>Others</span></a>
                         <div class="submenu-content">
                             <a href="" class="menu-item  <?= ($uri == 'all_users' ) ? 'active' : '' ?>"><span class="ik ik-message-circle"></span>&nbsp;&nbsp; Push notifications</a>

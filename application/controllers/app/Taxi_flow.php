@@ -2335,8 +2335,9 @@ location yet.!", 'distance' => number_format($km, 2),  'response' => NULL);
       for($i=0;$i<$count;$i++){
     
         if(!empty($_FILES['image']['name'][$i])){
-    
-            $config['file_name'] = date("Ymd_His").$_FILES['image']['name'][$i];
+            
+            
+          $config['file_name'] = date("Ymd_His").$_FILES['image']['name'][$i];
             
           $_FILES['file']['name'] = $_FILES['image']['name'][$i];
           $_FILES['file']['type'] = $_FILES['image']['type'][$i];
@@ -2348,17 +2349,23 @@ location yet.!", 'distance' => number_format($km, 2),  'response' => NULL);
     
         $this->upload->initialize($config);
 
+          $config['allowed_types'] = 'gif|jpg|png|jpeg';
+         $this->load->library('upload',$config);
+         if($this->upload->do_upload('file'))
+        {
+           $filedata = $this->upload->data();
+           $this->resize_image($filedata['full_path']);
+             
+             $data['totalFiles'][] =$filedata;
+        }else{
+             
+              print_r($this->upload->display_errors());
+           //  echo 'ki';
+         }
             
             
-          if($this->upload->do_upload('file')){
-          
-            $data['totalFiles'][] = $this->upload->data();
-         //   $data['totalFiles'][] = array('upload_data' => $this->upload->data());
             
-          }else{
-              
-             echo $this->upload->display_errors();
-          }
+            
         }
    
       }
@@ -2450,6 +2457,81 @@ location yet.!", 'distance' => number_format($km, 2),  'response' => NULL);
         TrackResponse($user_input, $response);
         $this->response($response);
     }
+    
+    
+
+    
+    
+    public function submitd_post()
+    {
+        
+        $files = $_FILES;
+        $cpt = count($_FILES ['image'] ['name']);
+        print_r($cpt);
+        
+    
+        for ($i = 0; $i < $cpt; $i ++) {
+            
+          $files = $_FILES;
+        
+            echo '<pre>';
+            print_r($_FILES);
+        
+            $name = time().$files ['image'] ['name'] [$i];
+            $_FILES ['multipleUpload'] ['name'] = $name;
+            $_FILES ['multipleUpload'] ['type'] = $files ['image'] ['type'] [$i];
+            $_FILES ['multipleUpload'] ['tmp_name'] = $files ['image'] ['tmp_name'] [$i];
+            $_FILES ['multipleUpload'] ['error'] = $files ['image'] ['error'] [$i];
+            $_FILES ['multipleUpload'] ['size'] = $files ['image'] ['size'] [$i];
+        
+        
+         $config['upload_path'] = FCPATH.'/storage/Resize';
+         $config['allowed_types'] = 'gif|jpg|png|jpeg';
+         $this->load->library('upload',$config);
+         if($this->upload->do_upload('multipleUpload'))
+        {
+           $filedata = $this->upload->data();
+           $this->resize_image($filedata['full_path']);
+             
+             print_r($filedata);
+        }else{
+             
+              print_r($this->upload->display_errors());
+           //  echo 'ki';
+         }
+            
+        }
+        
+        echo 'Hi';
+        
+    }
+    
+    function resize_image($file_path) {
+  
+        $CI =& get_instance();
+    // Set your config up
+    $config['image_library']    = "gd2";      
+    $config['source_image']     = $file_path;      
+    $config['create_thumb']     = TRUE;      
+    $config['maintain_ratio']   = TRUE;     
+    $config['new_image'] = $file_path; 
+    $config['width'] = "750";      
+    $config['height'] = "750";  
+    $config['thumb_marker']=FALSE;
+    $CI->load->library('image_lib');
+
+    $CI->image_lib->initialize($config);
+    // Do your manipulation
+
+    if(!$CI->image_lib->resize())
+    {
+      return $CI->image_lib->display_errors();  
+    } 
+        
+    $CI->image_lib->clear(); 
+
+}
+    
     
     
     
