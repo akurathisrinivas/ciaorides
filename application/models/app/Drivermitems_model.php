@@ -375,8 +375,6 @@ function get_rides($user_id){
 
     
 
-<<<<<<< Updated upstream
-=======
     // Driver Menus 
 function get_rides($user_id){
     
@@ -397,7 +395,4 @@ function get_rides($user_id){
 	return $data;
 }
 
-    
-
->>>>>>> Stashed changes
 }?>
