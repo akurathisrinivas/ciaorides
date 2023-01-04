@@ -62,11 +62,6 @@ class Drivermitems extends REST_Controller {
         }
  		
  		$rides=$this->Drivermitems_model->get_rides($user_id);
- 	//	$rides_scheduled=$this->Drivermitems_model->get_rides_scheduled($user_id);
-
-// 		$data['rides_taken']=$rides_taken;
-// 		$data['rides_offering']=array();
-// 		$data['rides_scheduled']=$rides_scheduled;
 
         $response = array('status' => true, 'message' => 'Data Fetched Successfully!', 'response' => $rides);
         $this->response($response);
