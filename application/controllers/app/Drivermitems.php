@@ -32,7 +32,7 @@ class Drivermitems extends REST_Controller {
 
 
     /*
-     *  get My Rides
+     *  get My Rides Driver APIS
      */
 
     function get_my_rides_post() {
@@ -61,14 +61,14 @@ class Drivermitems extends REST_Controller {
             }
         }
  		
- 		$rides_taken=$this->Drivermitems_model->get_rides_taken($user_id);
- 		$rides_scheduled=$this->Drivermitems_model->get_rides_scheduled($user_id);
+ 		$rides=$this->Drivermitems_model->get_rides($user_id);
+ 	//	$rides_scheduled=$this->Drivermitems_model->get_rides_scheduled($user_id);
 
- 		$data['rides_taken']=$rides_taken;
- 		$data['rides_offering']=array();
- 		$data['rides_scheduled']=$rides_scheduled;
+// 		$data['rides_taken']=$rides_taken;
+// 		$data['rides_offering']=array();
+// 		$data['rides_scheduled']=$rides_scheduled;
 
-        $response = array('status' => true, 'message' => 'Data Fetched Successfully!', 'response' => $data);
+        $response = array('status' => true, 'message' => 'Data Fetched Successfully!', 'response' => $rides);
         $this->response($response);
 
     }
