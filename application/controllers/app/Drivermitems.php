@@ -11,7 +11,7 @@ class Drivermitems extends REST_Controller {
     function __construct() {
         parent::__construct();
         date_default_timezone_set("Asia/Kolkata");
-        error_reporting(0);
+     //   error_reporting(0);
         set_time_limit(0);
         ini_set('memory_limit', '-1');
 
