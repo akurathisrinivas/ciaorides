@@ -37,76 +37,11 @@
               <div class="row">
                 <div class="col-lg-9 col-xs-12 col-sm-9 col-md-9 col-lg-offset-1">
 
-                  <div class="row form-group frm-btm">
-                    <div class="col-lg-3 col-sm-3 col-md-3 col-xs-3">
-                      <label class="input-text">Select State<span class="red bigger-120">*</span></label>
-                    </div>
-                    <div class="col-lg-1 col-xs-1 col-sm-1 col-md-1 input-text"> : </div>
-                    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12 word-brk">
-                      <select class="form-control" name="state_id" id="state_id" required="" onchange="getOrganisations(this.value)">
-                                <option value="">Select State</option>
-                                <?php
-                                if(!empty($states))
-                                {
-                                  foreach($states as $state)
-                                  {
-                                    ?>
-                                    <option value="<?=$state['id'];?>" <?php if($state['id'] == $record['state_id']){?> selected <?php }?>><?=$state['state'];?></option>
-                                    <?php
-                                  }
-                                }
-                                ?>
-                              </select>
-                    </div>
-                  </div>
-
-                  <div class="row form-group frm-btm">
-                      <div class="col-lg-3 col-sm-3 col-md-3 col-xs-3">
-                        <label class="input-text">Select Organisation <span class="red bigger-120">*</span></label>
-                      </div>
-                      <div class="col-lg-1 col-xs-1 col-sm-1 col-md-1 input-text"> : </div>
-                      <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12 word-brk">
-                        <select class="form-control" name="organisation_id" id="organisation_id" required="" onchange="getCenters(this.value)">
-                                 <option value="">Select Organisation</option> 
-                                 <?php
-                                if(!empty($organisations))
-                                {
-                                  foreach($organisations as $organisation)
-                                  {
-                                    ?>
-                                    <option value="<?=$organisation['id'];?>" <?php if($organisation['id'] == $record['organisation_id']){?> selected <?php }?> ><?=$organisation['organisation_name'];?></option>
-                                    <?php
-                                  }
-                                }
-                                ?>
-
-                        </select>
-                      </div>  
-                    </div>        
+                  
+       
                 
 
-                  <div class="row form-group frm-btm">
-                    <div class="col-lg-3 col-sm-3 col-md-3 col-xs-3">
-                      <label class="input-text">Center<span class="red bigger-120">*</span></label>
-                    </div>
-                    <div class="col-lg-1 col-xs-1 col-sm-1 col-md-1 input-text"> : </div>
-                    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12 word-brk">
-                      <select class="form-control" name="center_id" id="center_id" required="" onchange="getCourses(this.value)">
-                                <option value="">Select Center</option>
-                                <?php
-                                if(!empty($centers))
-                                {
-                                  foreach($centers as $center)
-                                  {
-                                    ?>
-                                    <option value="<?=$center['id'];?>" <?php if($center['id'] == $record['center_id']){?> selected <?php }?>><?=$center['center'];?></option>
-                                    <?php
-                                  }
-                                }
-                                ?>
-                              </select>
-                    </div>
-                  </div>
+                  
               <div class="row form-group frm-btm">
                     <div class="col-lg-3 col-sm-3 col-md-3 col-xs-5">
                       <label class="input-text">Enter Role<span class="red bigger-120">*</span></label>
