@@ -58,7 +58,7 @@ class Rolesmodel extends CI_Model
         }
         return $result;
     }
-/** In Function Add Check Exits records for select table **/
+    /** In Function Add Check Exits records for select table **/
 	public function exit_details($exit_data) {
         $this->db->select("*");
 		$this->db->from('roles');
@@ -75,10 +75,7 @@ class Rolesmodel extends CI_Model
 		}
 		//echo '<pre>'; print_r($roles_data);exit;
 		$set_data = array(
-            'state_id' => $this->input->post('state_id'),
-            'organisation_id' => $this->input->post('organisation_id'),
-            'center_id' => $this->input->post('center_id'),
-			'rolename' => $this->input->post('rolename'),
+            'rolename' => $this->input->post('rolename'),
 			'status' => 1,
 			'created_on' => date('Y-m-d H:i:s') 
 		);
@@ -290,10 +287,7 @@ class Rolesmodel extends CI_Model
 				$roles_data[$key]=  implode(',',$value);
 			}
 			$set_data = array(
-                'state_id' => $this->input->post('state_id'),
-                'organisation_id' => $this->input->post('organisation_id'),
-                'center_id' => $this->input->post('center_id'),
-				'rolename' => $this->input->post('rolename'),
+                'rolename' => $this->input->post('rolename'),
 				'status' => 1,
 				'modified_on' => date('Y-m-d H:i:s') 
 			);
@@ -306,43 +300,37 @@ class Rolesmodel extends CI_Model
 	public function empty_records($id){
 		$set_data = array(
 			'dashboard' => '',
-            'employee_dashboard' => '',
-            'daily_sheet' => '',
-            'total_batches' => '',
-            'my_collection' => '',
-            'my_admission' => '',
-			'students' => '',
-            'student_payments'=> '',
-            'bulk_students'=>'',
-            'overview_details'=>'',
-            'available_funds'=>'',
-            'transfer_funds'=>'',
-            'payment_approvals'=>'',
-            //'general_students'=>'',
-            'all_registered_students'=>'',
-            'expenses'=>'',
-            'expense_approval'=>'',
-            'categories'=>'',
-            'advance_release'=>'',
-            'states'=>'',
-            'organisations'=>'',
-            'centers'=>'',
-            'courses' => '',
-            'batchs' => '',
-            'attachment_groups'=>'',
-			'attachments' => '',
-			'payment_modes' => '',
-            'colleges' => '',
-            'discount_schemes' => '',
-            'departments' => '',
-            'in_stock' => '',
-            'schedule' => '',
-            'events' => '',
-            'special_attendance' => '',
+            'taxi_drivers' => '',
+            'passengers' => '',
+            'private_drivers' => '',
+            'inactive_users' => '',
+            'city_rides' => '',
+			'city_bookings' => '',
+            'city_cancellation'=> '',
+            'city_refunds'=>'',
+            'taxi_rides'=>'',
+            'taxi_bookings'=>'',
+            'taxi_cancellation'=>'',
+            'taxi_refunds'=>'',
+            'sharing_rides'=>'',
+            'sharing_bookings'=>'',
+            'sharing_cancellation'=>'',
+            'sharing_refunds'=>'',
+            'taxi_driver_feedbacks'=>'',
+            'passenger_feedbacks'=>'',
+            'private_driver_feedbacks'=>'',
+            'inactive_user_feedbacks'=>'',
+            'taxi_calculations'=>'',
+            'sharing_calculations' => '',
+            'vehicle_brands' => '',
+            'vehicle_models'=>'',
 			'roles' => '',
-			'employees' => '',			
-			
-		);
+			'employees' => '',
+            'push_notifications' => '',
+            'emergency_contacts' => '',
+            'admin_chart' => '',
+            'support' => '',
+        );
 		$this->db->where('id',$id);
 		$result = $this->db->update('roles', $set_data); 
 		return $result;
