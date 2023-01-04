@@ -11,6 +11,8 @@ class Roles extends CI_Controller {
 	public $footer = 'admin/includes/footer';
 	public $list_roles='admin/roles/list_roles';
 	public $add_roles='admin/roles/add_roles';
+	public $edit_roles='admin/roles/edit_roles';
+
 
 
     function __construct() {
@@ -36,7 +38,7 @@ class Roles extends CI_Controller {
 
 
 
-    public function roles()
+    public function index()
 	{		
 
 		//$this->data['url']='admin/roles/roles/';
@@ -64,9 +66,6 @@ class Roles extends CI_Controller {
 				if($this->input->post('method')!=''){
 							$exit_data = array(
 								'rolename' => ($this->input->post('rolename')),
-								'state_id' => $this->input->post('state_id'),
-								'organisation_id' => $this->input->post('organisation_id'),
-								'center_id' => $this->input->post('center_id'),
 							);				
 							$exit_details = $this->my_model->exit_details($exit_data);
 
@@ -92,7 +91,61 @@ class Roles extends CI_Controller {
 
 	}
 
+	public function edit_roles($id){
+		$data['module_names'] = $this->common_model->module_names();
+		$data['record'] = $this->my_model->get_single_record($id);
 
+		
+
+		if($this->input->post('submit') != ''){
+				if($this->input->post('method')!=''){
+					$result = $this->my_model->update_record($id);
+					//echo '<pre>'; print_r($result);
+					if(!empty($result)){
+						$this->session->set_flashdata('success', 'Updated Successfully...');
+						
+					}else{
+						$this->session->set_flashdata('error', 'Not Updated...');
+					}
+
+			}else{
+					$this->session->set_flashdata('success', 'Please select any check box...');
+				}
+				redirect(base_url().'/admin/roles/edit_roles/'.$id);
+		}
+		if($this->session->userdata('user_id') != 'ADM0001'){
+		 $data['roleResponsible'] = $this->common_model->get_responsibilities();
+	     }else{
+		 $data['roleResponsible'] = $this->common_model->get_default_responsibilities();
+		 }
+		$this->setHeaderFooter($this->edit_roles,$data);
+	}
+
+
+	/*-----------  Roles --------------*/
+  public function all_roles()
+
+	{
+
+        $records = $this->my_model->all_roles($_POST);
+
+        $result_count=$this->my_model->all_roles($_POST,1);
+
+        $json_data = array(
+
+            "draw"  => intval($_POST['draw'] ),
+
+            "iTotalRecords"  => intval($result_count ),
+
+            "iTotalDisplayRecords"  => intval($result_count ),
+
+            "recordsFiltered"  => intval(count($records) ),
+
+            "data"  => $records);  
+
+        echo json_encode($json_data);
+
+    }
 
 
 	/*-----------start setting header and footer --------------*/

@@ -1145,20 +1145,104 @@ class Common_model extends CI_Model
             'Dashboard' => array(
                 'l' => 'View'
             ),
-            'Taxi Users' => array(
+            'Taxi Drivers' => array(
                 'l' => 'View'
             ),
-            'Sharing Users' => array(
+            'Passengers' => array(
                'l' => 'View'
             ),
 
-            'Drivers' => array(
+            'Private Drivers' => array(
                'l' => 'View'
                
             ),
 
+            'Inactive Users' => array(
+               'l' => 'View'
+               
+            ),
+
+            
+            'City Rides' => array(
+                
+                'l' => 'View',
+                
+            ),
+
+            'City Bookings' => array(
+                'l' => 'View',
+            ),
+            'City Cancellation' => array(
+                'l' => 'View',
+                
+            ),
+            'City Refunds' => array(
+                'l' => 'View',              
+            ),
+
+
+            'Taxi Rides' => array(
+                'l' => 'View',
+            ),
+            'Taxi Bookings' => array(
+                'l' => 'View',              
+            ),
+            'Taxi Cancellation'  => array(
+                'l' => 'View',
+            ), 
+			'Taxi Refunds'  => array(
+                'l' => 'View',
+            ),
+
+            'Sharing Rides'  => array(
+                'l' => 'View',
+            ),
+            'Sharing Bookings'  => array(
+                'l' => 'View',
+            ),
+            'Sharing Cancellation'  => array(
+                'l' => 'View',
+            ),
+
+            'Sharing Refunds'  => array(
+                'l' => 'View',
+            ),
+
+           
+            'Taxi Driver feedbacks'  => array(
+                'l' => 'View',
+            ),
+
+            'Passenger feedbacks'  => array(
+                'l' => 'View',
+            ),
+
+            'Private Driver feedbacks'  => array(
+                'l' => 'View',
+            ),
+
+            'Inactive User feedbacks'  => array(
+                'l' => 'View',
+            ),
+
+            'Taxi Calculations'  => array(
+                'l' => 'View',
+                'a' => 'Add',
+                'e' => 'Edit',
+                'd' => 'Delete',
+                's' => 'Status',
+            ),
+
+            'Sharing Calculations'  => array(
+                'l' => 'View',
+                'a' => 'Add',
+                'e' => 'Edit',
+                'd' => 'Delete',
+                's' => 'Status',
+            ),
+
             'Vehicle Brands' => array(
-               'l' => 'View',
+                'l' => 'View',
                 'a' => 'Add',
                 'e' => 'Edit',
                 'd' => 'Delete',
@@ -1166,61 +1250,13 @@ class Common_model extends CI_Model
             ),
             
             'Vehicle Models' => array(
-              'l' => 'View',
+                'l' => 'View',
 	            'a' => 'Add',
 	            'e' => 'Edit',
 	            'd' => 'Delete',
 	            's' => 'Status',
             ),
 
-            
-            
-            'Taxi Rides' => array(
-                
-                'l' => 'View',
-                
-            ),
-
-            'Taxi Bookings' => array(
-                'l' => 'View',
-            ),
-            'Taxi Cancel By User' => array(
-                'l' => 'View',
-                
-            ),
-            'Taxi Cancel By Driver' => array(
-                'l' => 'View',              
-            ),
-            'InterCity Bookings' => array(
-                'l' => 'View',              
-            ),
-            'InterCity Ongoing Rides' => array(
-                'l' => 'View',
-            ),
-            'InterCity Scheduled Rides'  => array(
-                'l' => 'View',
-                
-                              
-            ), 
-
-            'InterCity Completed Rides'  => array(
-                'l' => 'View',
-                
-                              
-            ),
-
-            'InterCity Rides Canceled By User'  => array(
-                'l' => 'View',
-                
-                              
-            ),
-
-            'Sharing All Rides'  => array(
-                'l' => 'View',
-                
-                              
-            ),
-            
            'Roles' => array(
                 'l' => 'View',
                 'a' => 'Add',
@@ -1237,6 +1273,37 @@ class Common_model extends CI_Model
                 's' => 'Status',
                 
             ),
+            
+            'Push Notifications'  => array(
+                'l' => 'View',
+                'a' => 'Add',
+                'e' => 'Edit',
+                'd' => 'Delete',
+                's' => 'Status',
+             ),
+            'Emergency Contacts'  => array(
+                'l' => 'View',
+                'a' => 'Add',
+                'e' => 'Edit',
+                'd' => 'Delete',
+                's' => 'Status',
+             ),
+            'Admin Chart'  => array(
+                'l' => 'View',
+                'a' => 'Add',
+                'e' => 'Edit',
+                'd' => 'Delete',
+                's' => 'Status',
+             ),
+            'Support'  => array(
+                'l' => 'View',
+                'a' => 'Add',
+                'e' => 'Edit',
+                'd' => 'Delete',
+                's' => 'Status',
+             ),
+
+            
 
            
 

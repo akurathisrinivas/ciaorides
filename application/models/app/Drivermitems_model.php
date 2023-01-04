@@ -352,4 +352,27 @@ function get_rides($user_id){
     
     
 
+    // Driver Menus 
+function get_rides($user_id){
+    
+
+	$query="SELECT r.*, u.first_name, u.last_name FROM `rides` as r INNER JOIN users u ON r.user_id = u.id  WHERE r.`type`='taxi' AND r.user_id='$user_id'";
+
+    $result=$this->db->query($query)->result_array();
+    
+    
+    	foreach($result as $row){
+            
+            $amount=$row['amount_per_head']*$row['seats'];
+            
+            $row['Total_amount']=round($amount, 2); 
+            
+            $data[]=$row;
+		}
+    
+	return $data;
+}
+
+    
+
 }?>
