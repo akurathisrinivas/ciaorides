@@ -4,48 +4,81 @@
 <!-- END PAGE TITLE -->
 <!-- PAGE CONTENT WRAPPER -->
 <div class="main-content">
-  <div class="main-content-inner">
-    <div class="breadcrumbs" id="breadcrumbs">
-            <script type="text/javascript">
-              try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
-            </script>
+<div class="container-fluid">
+      
+<div class="page-header">
+            <div class="row align-items-end">
+                <div class="col-lg-8">
+                    <div class="page-header-title">
+                        <i class="fa  fa-user bg-green"></i>
+                        <div class="d-inline">
+                            <h5>Role Management</h5>
+                            <span>Roles List</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <nav class="breadcrumb-container" aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="javascript:void(0)"><i class="ik ik-home"></i></a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href="<?php echo site_url();?>admin/dashboard">Roles Management</a>
+                            </li>
 
-            <ul class="breadcrumb">
-              <li>
-                <i class="ace-icon fa fa-home home-icon"></i>
-                <a href="<?php echo site_url();?>admin/dashboard">Home</a>
-              </li>
+                            <li class="breadcrumb-item active" aria-current="page"> Roles List </li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+      
+      
 
-              
-              <li class="active">Roles</li>
-            </ul><!-- /.breadcrumb -->
-
-            
-          </div>
-
-<div class="page-content">
-  <div class="page-header-1">
-              <h1 class="col-lg-3 col-sm-4 col-md-5 col-xs-7 mbl-mgbtm-5 pdg-top-10">
-                <i class="menu-icon blue fa fa-cart-arrow-down"></i>  
-                Roles 
-              </h1>
+<!--
+ <div class="page-content">
+                 <div class="page-header-1">
+ 
               <?php if( in_array('a',$roleResponsible['roles'])){?>
                 <div class="pull-right ">   
                   <a href="<?php echo base_url();?>admin/roles/add_roles" class="btn btn-success btn-sm" type="button"><i class="fa fa-plus fa-lg"></i> Add </a>                          
                   <input type="hidden" name="hiv" id="hiv" value="0" />
                </div>
               <?php }?>
-          
-            </div><!-- /.page-header -->
+            </div>
+            </div>
+-->
+      
+      
+      
+      <!-- /.page-header -->
 
-  <div class="row" style="margin: 36px 0 0 0;">
-    <div class="col-md-12">
- 
-      <!-- START DATATABLE EXPORT -->
-      <div class="panel panel-default">
-        
-       <?php echo $message;?>
-        <div class="panel-body">
+
+            
+  <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="col-md-6 col-xs-6">
+                            <h3> Roles List </h3>
+                        </div>
+
+                        <div class="col-md-6 col-xs-6">
+                             <?php if( in_array('a',$roleResponsible['roles'])){?>
+                            <h3 class="panel-title" style="float: right;">
+                                
+                                <a href="<?php echo base_url();?>admin/roles/add_roles" class="btn btn-success btn-sm" type="button"><i class="fa fa-plus fa-lg"></i> Add </a>
+                            
+                            </h3>
+                            
+                               <?php }?>
+                            
+                        </div>
+                    </div>
+                    <div class="card-block">
+            
+            
           <div class="table-responsive">
           <div id="wait" style="display:none;width:69px;height:89px;position:absolute;top:50%;left:50%;padding:2px; z-index:99999999"><img src='<?=base_url();?>assets/img/demo_wait.gif' width="64" height="64" /></div>
             <input type="hidden" id="atpagination" value="">
@@ -54,6 +87,8 @@
 
             <!-------- Search Form ---------->
             <form id="fees_form" name="search_fees" method="post" class="pull-right">
+                
+                <div class="row">
               <div class="col-md-3 col-md-offset-3" style="padding:0">
                   <input type="text" name="search_text_1" id="search_text_1" placeholder="Type keyword to search" class="input-sm form-control custom-input" style="margin-left:5px;">
               </div>
@@ -77,17 +112,26 @@
               <button type="button" id="search_user" class="btn btn-info margin_search" style=""><i class="fa fa-search icon-style"></i></button>
               <a class="btn btn-danger" style="display:none;" id="searchreset" href="<?php echo base_url('admin/roles'); ?>"><li class="fa fa-minus icon-style"></li></a>
               </div>
+                    
+                </div>
             </form> 
             <!-------- /Search Form ---------->
 
             </table>                                            
           </div>
+            
+            
+            
+            
         </div>
       </div>
       <!-- END DATATABLE EXPORT -->      
     </div>
   </div>
-</div>   
+
+      
+      
+      
 </div>       
 </div> 
 <script>

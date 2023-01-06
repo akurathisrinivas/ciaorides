@@ -1,37 +1,43 @@
-
 <div class="main-content">
-        <div class="main-content-inner">
-          <div class="breadcrumbs" id="breadcrumbs">
-            <script type="text/javascript">
-              try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
-            </script>
-            <ul class="breadcrumb">
-              <li>
-                <i class="ace-icon fa fa-home home-icon"></i>
-                <a href="<?php echo site_url();?>admin/dashboard">Home</a>
-              </li>
-              <li>                 
-                <a href="<?php echo site_url();?>admin/roles">Roles</a>
-              </li>
-              <li class="active"> Edit</li>
-            </ul><!-- /.breadcrumb -->            
-          </div>
+    <div class="container-fluid">
+        <div class="page-header">
+            <div class="row align-items-end">
+                <div class="col-lg-4">
+                    <div class="page-header-title">
+                        <i class="fa  fa-users bg-green"></i>
+                        <div class="d-inline">
+                            <h5>Edit Role   </h5>
+                            <span> Role Management </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <nav class="breadcrumb-container" aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="javascript:void(0)"><i class="ik ik-home"></i></a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href="<?= base_url('admin') ?>">Dashboard</a>
+                            </li>
+                            <li class="breadcrumb-item">
+ <a href="<?php echo site_url();?>admin/roles">Roles Management</a>                            </li>
 
-          <div class="page-content">
-            <div class="page-header-2">
-              <h1 class="col-lg-4 col-md-3 col-sm-3 col-xs-12 pdg-top-10">
-                <i class="menu-icon fa fa-list-ul blue"></i>Roles
-                <span class="label label-purple arrowed">Edit<span>
-              </h1>
-              <div class="pull-right ">              
-                 <input type="hidden" name="hiv" id="hiv" value="0" />
-                           </div>
-            </div><!-- /.page-header -->
-            
+                            <li class="breadcrumb-item active" aria-current="page">  Edit Role </li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+<!-- END BREADCRUMB -->
+
+<!-- PAGE CONTENT WRAPPER -->
+<div class="page-content-wrap">
+    
              <?php echo $message; ?>
 
           <div class="row">
-              <div class="col-xs-12">
+              <div class="col-xs-11 offset-1">
                 <!-- PAGE CONTENT BEGINS -->
                     <form class="form-horizontal" role="form" name="myform" id="myform" method="post" action="<?php echo base_url()?>admin/roles/edit_roles/<?php echo $record['id'] ?>?>" enctype="multipart/form-data">
               <div class="row">
@@ -94,7 +100,7 @@
   </div>
           </div>
           <div class="panel-footer">
-            <a href="<?=base_url();?>admin/roles/roles" class="btn btn-primary pull-right" style="margin-left:10px;">Cancel</a>    
+            <a href="<?=base_url();?>admin/roles" class="btn btn-primary pull-right" style="margin-left:10px;">Cancel</a>    
             <button type="submit" name="submit" value="edit" class="btn btn-primary pull-right" id="btnSubmit">Submit</button>
           </div>
            </form>
@@ -102,8 +108,11 @@
      
 
     </div>
-  </div>
 </div>
+    
+    
+    
+    </div>
 </div>
 <!-- END PAGE CONTENT WRAPPER -->
 <script src="<?php echo base_url(); ?>assets/js/jquery.validate.js"></script>

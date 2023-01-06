@@ -50,6 +50,18 @@ class Roles extends CI_Controller {
 		$this->setHeaderFooter($this->list_roles,$data);
 	}
 
+    public function list_roles()
+	{		
+
+		//$this->data['url']='admin/roles/roles/';
+		if($this->session->userdata('user_id') != 'ADM0001'){
+		 $data['roleResponsible'] = $this->common_model->get_responsibilities();
+	     }else{
+		 $data['roleResponsible'] = $this->common_model->get_default_responsibilities();
+		 }
+		$this->setHeaderFooter($this->list_roles,$data);
+	}
+
 
 	public function add_roles()
 	{  

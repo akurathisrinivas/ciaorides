@@ -325,7 +325,7 @@ public function checknull($array=array()){
     }
     
     
-    
+
 
     // Driver Menus 
 function get_rides($user_id){

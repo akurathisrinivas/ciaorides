@@ -95,7 +95,7 @@
                         <div class="submenu-content">
                             <a href="<?php echo base_url() ?>admin/Roles/add_roles" class="menu-item  <?= ($uri == 'roles' || $uri == "add_roles" || $uri == "edit_roles" || $uri == "view_roles") ? 'active' : '' ?>"><span class="fa fa-lock  active "></span>&nbsp;&nbsp; Add Role</a>
                             
-                            <a href="" class="menu-item  <?= ($uri == 'roles' || $uri == "list_roles" || $uri == "edit_roles" || $uri == "view_roles") ? 'active' : '' ?>"><span class="fa fa-lock  active "></span>&nbsp;&nbsp; Roles List</a>
+                            <a href="<?php echo base_url() ?>admin/Roles/list_roles" class="menu-item  <?= ($uri == 'roles' || $uri == "list_roles" || $uri == "edit_roles" || $uri == "view_roles") ? 'active' : '' ?>"><span class="fa fa-lock  active "></span>&nbsp;&nbsp; Roles List</a>
                             <a href="" class="menu-item   <?= ($uri == 'employees' || $uri == "add_employee" || $uri == "edit_employee" || $uri == "view_employee") ? 'active' : '' ?>"><span class="fa fa-users  active"></span>&nbsp;&nbsp;Employees  </a>  
                                
                       
