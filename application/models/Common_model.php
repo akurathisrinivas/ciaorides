@@ -1324,4 +1324,182 @@ public function module_methods(){
             );
     }
 
+    public function get_table_row($table_name='', $where='', $columns='', $order_column='', $order_by='asc', $limit=''){
+
+			if(!empty($columns)) {
+
+			$tbl_columns = implode(',', $columns);
+
+			$this->db->select($tbl_columns);
+
+			}
+
+			if(!empty($where)) $this->db->where($where);
+
+			if(!empty($order_column)) $this->db->order_by($order_column, $order_by); 
+
+			if(!empty($limit)) $this->db->limit($limit); 
+
+			$query = $this->db->get($table_name);
+
+			if($columns=='test') { echo $this->db->last_query(); exit; }
+
+			  //echo $this->db->last_query();exit;
+
+			return $query->row_array();
+
+}
+
+
+
+ public function get_table($table_name='', $where='', $columns='', $order_column='', $order_by='asc', $limit='', $offset=''){
+
+		if(!empty($columns)) 
+
+		{
+
+		$tbl_columns = implode(',', $columns);
+
+		$this->db->select($tbl_columns);
+
+		}
+
+		if(!empty($where)) $this->db->where($where);
+
+		if(!empty($order_column)) $this->db->order_by($order_column, $order_by); 
+
+		if(!empty($limit) && !empty($offset)) $this->db->limit($limit, $offset); 
+
+		else if(!empty($limit)) $this->db->limit($limit); 
+
+		$query = $this->db->get($table_name);
+
+		//echo $this->db->last_query(); exit;
+
+		//if($columns=='test') { echo $this->db->last_query(); exit; }
+
+		//echo $this->db->last_query();
+
+		return $query->result_array();
+
+}	
+
+public function insert_table($table_name='', $array='', $insert_id ='', $batch=false){
+
+	if(!empty($array) && !empty($table_name)){
+
+	if($batch){
+
+	$this->db->insert_batch($table_name, $array);
+
+	}
+
+	else {$this->db->insert($table_name, $array);}
+
+	//echo $this->db->last_query(); exit;
+
+	//if(!empty($insert_id)) return $this->db->insert_id();
+
+	return $this->db->insert_id();
+
+	}
+
+}
+
+public function update_table($table_name='', $array='', $where='', $test=0)
+
+
+
+	{		
+
+
+
+		if(!empty($array) && !empty($table_name) && !empty($where))
+
+
+
+		{
+
+
+
+			$this->db->where($where);
+
+
+
+			$result=$this->db->update($table_name, $array);
+
+
+
+			
+
+
+
+		}
+
+	//	echo $this->db->last_query(); exit;
+
+		return  $result;
+
+		//if($test) echo $this->db->last_query(); exit;
+
+
+
+	}		
+
+	
+
+	public function delete_rows($table_name='', $where=''){
+
+		if(!empty($table_name) && !empty($where))
+
+		{
+
+		$this->db->where($where);
+
+		$result=$this->db->delete($table_name);
+
+		}
+
+		return  $result;
+
+		//echo $this->db->last_query(); exit;
+
+		}
+
+		function getDynamicId($column_name,$dynamic_test){
+
+ 		$ci = &get_instance();
+        /* Reference No */
+        $reference_id='';
+        $ci->db->select("*");
+        $ci->db->from('tbl_dynamic_nos');
+        $query = $ci->db->get();
+        $row_count = $query->num_rows();
+        if($row_count > 0){
+
+            $refers_no = $query->row_array();
+            $ref_no=$refers_no[$column_name]+1;
+            $refernce_data = array($column_name => $ref_no,
+                                   'update_date_time'    => date('Y-m-d H:i:s')
+                                   );
+            $ci->db->where('id',1);
+            $update = $ci->db->update('tbl_dynamic_nos', $refernce_data);
+        }else{
+
+            $ref_no=1;
+            $refernce_data =   array($column_name => $ref_no,
+                                    'update_date_time'   => date('Y-m-d H:i:s')
+                                    );
+            $update = $ci->db->insert('tbl_dynamic_nos', $refernce_data); 
+        }
+        
+        
+        $reference_id =  $dynamic_test.$ref_no;
+        
+        //$reference_id="BBM".$ref_no;
+        /* Reference No */
+        return $reference_id;
+}
+
+
 }

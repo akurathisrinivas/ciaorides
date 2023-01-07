@@ -92,18 +92,18 @@ class Rolesmodel extends CI_Model
 
         $columns = array
         (
-        0 => 'users.user_id',
-        1 => 'users.user_name',
-        2 => 'users.user_email',
-        3 => 'users.user_mobile',
+        0 => 'employees.user_id',
+        1 => 'employees.user_name',
+        2 => 'employees.user_email',
+        3 => 'employees.user_mobile',
         );
 
         $search_1 = array
         (
-        1 => 'users.user_id',
-        2 => 'users.user_name',
-        3 => 'users.user_email',
-        4 => 'users.user_mobile',
+        1 => 'employees.user_id',
+        2 => 'employees.user_name',
+        3 => 'employees.user_email',
+        4 => 'employees.user_mobile',
         );        
         if(isset($pdata['search_text_1'])!="")
         {
@@ -111,21 +111,21 @@ class Rolesmodel extends CI_Model
         }
         if($getcount)
         {
-        return $this->db->select('users.id')->from('users')
-        ->join('tbl_roles', 'FIND_IN_SET(tbl_roles.id, tbl_users.role_ids)', '', FALSE)        
-        ->where('users.id !=', '1')
-        ->group_by('users.id')
-        ->order_by('users.id','desc')->get()->num_rows();   
+        return $this->db->select('employees.id')->from('employees')
+        ->join('roles', 'FIND_IN_SET(roles.id, employees.role_ids)', '', FALSE)        
+        ->where('employees.id !=', '1')
+        ->group_by('employees.id')
+        ->order_by('employees.id','desc')->get()->num_rows();   
 
         //echo $this->db->last_query();exit;
         }
         else
         {
-        $var=$this->db->select('users.*,GROUP_CONCAT(DISTINCT tbl_roles.rolename SEPARATOR ", ") as roles')->from('users')
-        ->join('tbl_roles', 'FIND_IN_SET(tbl_roles.id, tbl_users.role_ids)', '', FALSE)        
-        ->where('users.id !=', '1')
-        ->group_by('users.id')
-        ->order_by('users.id','desc');
+        $var=$this->db->select('employees.*,GROUP_CONCAT(DISTINCT roles.rolename SEPARATOR ", ") as roles')->from('employees')
+        ->join('roles', 'FIND_IN_SET(roles.id, employees.role_ids)', '', FALSE)        
+        ->where('employees.id !=', '1')
+        ->group_by('employees.id')
+        ->order_by('employees.id','desc');
         // echo $this->db->last_query();exit;
         }
 
@@ -180,7 +180,7 @@ class Rolesmodel extends CI_Model
 
     {
 
-        $result=$this->db->insert('users', $data); 
+        $result=$this->db->insert('employees', $data); 
 
     //echo $this->db->last_query();exit;            
 
@@ -196,7 +196,7 @@ class Rolesmodel extends CI_Model
 
         $this->db->where('id', $this->uri->segment(4));
 
-        $query = $this->db->get('users');      
+        $query = $this->db->get('employees');      
 
         return $query->row();
 
@@ -208,7 +208,7 @@ class Rolesmodel extends CI_Model
 
         $this->db->where('id', $id);
 
-        $result=$this->db->update('users', $data);             
+        $result=$this->db->update('employees', $data);             
 //echo $this->db->last_query();exit;   
         return $result;
 
@@ -222,7 +222,7 @@ class Rolesmodel extends CI_Model
 
         $this->db->where('id', $this->uri->segment(4));
 
-        $result=$this->db->update('users', $data); 
+        $result=$this->db->update('employees', $data); 
 
         //echo $this->db->last_query();exit;            
 
@@ -303,7 +303,7 @@ class Rolesmodel extends CI_Model
             'taxi_drivers' => '',
             'passengers' => '',
             'private_drivers' => '',
-            'inactive_users' => '',
+            'inactive_employees' => '',
             'city_rides' => '',
 			'city_bookings' => '',
             'city_cancellation'=> '',

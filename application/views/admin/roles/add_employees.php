@@ -29,7 +29,7 @@
                            </div>
             </div><!-- /.page-header -->
             
-             <?php echo $message; ?>
+             <?php /*echo $message;*/ ?>
 
          <div class="row">
               <div class="col-xs-12">
@@ -38,52 +38,13 @@
               <div class="row">
                 <div class="col-lg-9 col-xs-12 col-sm-9 col-md-9 col-lg-offset-1">
 
-                  <div class="form-group">
-                    <div class="col-md-3 col-xs-12 control-label">
-                    Select State<span class="red bigger-120">*</span>
-                    </div>
-                     <div  class="col-md-6 col-xs-12">
-                      <select class="form-control" name="state_id" id="state_id" required="" onchange="getOrganisations(this.value)">
-                                <option value="">Select State</option>
-                                <?php
-                                if(!empty($states))
-                                {
-                                  foreach($states as $state)
-                                  {
-                                    ?>
-                                    <option value="<?=$state['id'];?>"><?=$state['state'];?></option>
-                                    <?php
-                                  }
-                                }
-                                ?>
-                              </select>
-                    </div>
-                  </div>
+                  
 
                   
-                    <div class="form-group">
-                     <div class="col-md-3 col-xs-12 control-label">
-                       Select Organisation <span class="red bigger-120">*</span>
-                      </div>
-                       <div  class="col-md-6 col-xs-12">
-                        <select class="form-control" name="organisation_id" id="organisation_id" required="" onchange="getCenters(this.value)">
-                                 <option value="">Select Organisation</option> 
-                                </select>
-                      </div>  
-                    </div>        
+                           
                 
 
-                  <div class="form-group">
-                    <div class="col-md-3 col-xs-12 control-label">
-                     Center<span class="red bigger-120">*</span>
-                    </div>
-                     <div  class="col-md-6 col-xs-12">
-                      <select class="form-control" name="center_id" id="center_id" required="" onchange="getroles(this.value)">
-                                <option value="">Select Center</option>
-                                
-                              </select>
-                    </div>
-                  </div>
+                 
 
               <div class="form-group">
 
@@ -102,21 +63,19 @@
 
               </div>
 
+              
+
               <div class="form-group">
 
-              <label class="col-md-3 col-xs-12 control-label">Select Department  <span style="color:red">*</span></label>
+        <label for="title" class="col-md-3 col-xs-12 control-label">Enter Department <span style="color:red">*</span></label>
 
-              <div  class="col-md-6 col-xs-12">
+                <div class="col-md-6 col-xs-12">                
 
-            <select class="form-control"   name="department_id" id="department_id" required="" data-parsley-required-message="Department is Required" >
-              <option value="">Select</option>
-             <!--  <?php foreach($departments as $depart){?>
-                  <option value="<?php echo $depart['id']?>"><?php echo $depart['dept_name']?></option>
-               <?php }?>  -->
+                 
 
-                </select>
+                  <input type="text" class="form-control" name="department" id="title" required="" data-parsley-required-message="Please enter department Name" />
 
-              </div>
+                </div>
 
               </div>
 
@@ -244,29 +203,9 @@
 
               
 
-                    <div class="form-group">
-                    <div class="col-md-3 col-xs-12 control-label">
-                     From Payment Modes 
-                    </div>
-                     <div  class="col-md-6 col-xs-12">
-                      <select class="form-control" name="payment_mode_id" id="payment_mode_id" required="" >
-                              <option value="">Select Payment Mode</option>
-                                
-                              </select>
-                    </div>
-                    </div>
+                   
 
-                    <div class="form-group">
-                    <div class="col-md-3 col-xs-12 control-label">
-                     To Payment Modes 
-                    </div>
-                     <div  class="col-md-6 col-xs-12">
-                      <select class="form-control standardSelect" multiple name="to_payment_mode_id[]" id="to_payment_mode_id" required="" >
-                              <option value="">Select Payment Mode</option>
-                                
-                              </select>
-                    </div>
-                    </div>
+                    
 
 
               <div class="form-group">
