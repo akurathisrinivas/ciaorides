@@ -29,7 +29,7 @@
                            </div>
             </div><!-- /.page-header -->
             
-             <?php echo $message; ?>
+             <?php //echo $message; ?>
 
            <div class="row">
               <div class="col-xs-12">
@@ -55,74 +55,12 @@
 
               </div>
 
-              <div class="form-group">
-                    <div class="col-md-3 col-xs-6 control-label">
-                    Select State<span class="red bigger-120">*</span>
-                    </div>
-                     <div  class="col-md-6 col-xs-6">
-                      <select class="form-control" name="state_id" id="state_id" required="" onchange="getOrganisations(this.value)">
-                                <option value="">Select State</option>
-                                <?php
-                                if(!empty($states))
-                                {
-                                  foreach($states as $state)
-                                  {
-                                    ?>
-                                    <option value="<?=$state['id'];?>" <?php if($state['id'] == $row->state_id){?> selected  <?php }?>><?=$state['state'];?></option>
-                                    <?php
-                                  }
-                                }
-                                ?>
-                              </select>
-                    </div>
-                  </div>
+             
 
-                  
-                    <div class="form-group">
-                     <div class="col-md-3 col-xs-6 control-label">
-                       Select Organisation <span class="red bigger-120">*</span>
-                      </div>
-                       <div  class="col-md-6 col-xs-6">
-                        <select class="form-control" name="organisation_id" id="organisation_id" required="" onchange="getCenters(this.value)">
-                                 <option value="">Select Organisation</option>
-
-                                  <?php
-                                if(!empty($organisations))
-                                {
-                                  foreach($organisations as $org)
-                                  {
-                                    ?>
-                                    <option value="<?=$org['id'];?>"  <?php if($org['id'] == $row->organisation_id){?> selected  <?php }?> ><?=$org['organisation_name'];?></option>
-                                    <?php
-                                  }
-                                }
-                                ?> 
-                                </select>
-                      </div>  
-                    </div>        
+                        
                 
 
-                  <div class="form-group">
-                    <div class="col-md-3 col-xs-6 control-label">
-                     Center<span class="red bigger-120">*</span>
-                    </div>
-                     <div  class="col-md-6 col-xs-6">
-                      <select class="form-control" name="center_id" id="center_id" required="" onchange="getroles(this.value)">
-                                <option value="">Select Center</option>
-                                 <?php
-                                if(!empty($centers))
-                                {
-                                  foreach($centers as $center)
-                                  {
-                                    ?>
-                                    <option value="<?=$center['id'];?>"  <?php if($center['id'] == $row->center_id){?> selected  <?php }?> ><?=$center['center'];?></option>
-                                    <?php
-                                  }
-                                }
-                                ?>
-                              </select>
-                    </div>
-                  </div>
+                 
 
                   <div class="form-group">
 
@@ -154,13 +92,7 @@
 
               <div  class="col-md-6 col-xs-6">
 
-            <select class="form-control"   name="department_id" id="department_id" required="" data-parsley-required-message="Department is Required" >
-              <option value="">Select</option>
-              <?php foreach($departments as $depart){?>
-                  <option value="<?php echo $depart['id']?>" <?php if($depart['id'] == $row->department_id){?> selected <?php }?> ><?php echo $depart['dept_name']?></option>
-               <?php }?> 
-
-                </select>
+          <input type="text" class="form-control" name="department" id="title" required="" data-parsley-required-message="Please enter department Name" value="<?php echo $row->department?>" />
 
               </div>
 

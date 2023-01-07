@@ -44,7 +44,7 @@
       <!-- START DATATABLE EXPORT -->
       <div class="panel panel-default">
         
-       <?php echo $message;?>
+       <?php //echo $message; ?>
         
         <div class="panel-body">
           <div class="table-responsive">
