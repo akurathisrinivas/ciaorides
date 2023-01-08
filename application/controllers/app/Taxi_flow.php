@@ -2330,7 +2330,7 @@ location yet.!", 'distance' => number_format($km, 2),  'response' => NULL);
    
          
       $count = count($_FILES['image']['name']);
-     if($count==0){
+     if($count>0){
       // print_r($count);
           
       for($i=0;$i<$count;$i++){
@@ -2543,6 +2543,151 @@ location yet.!", 'distance' => number_format($km, 2),  'response' => NULL);
     
     
     
+        
+    public function uploadfile_post()
+
+	{
+	    
+	    
+   // upload_type - 1 -driving licence 2- adhar card 3- pan card 4- Profile Pic 5- Government 6- VehicleRegistration 7 - VehicleInsurance 8- FitnessCertificates 9- VehiclePermit 10- VehicleImages
+	    
+	    
+   $upload_type=$this->input->post('upload_type');
+        
+      if($upload_type!=0 && $upload_type<12){
+      
+      if($upload_type==1){
+          
+          $config['upload_path']   =  './storage/DrivingLicence/';
+          
+      }else if($upload_type==2){
+          
+           $config['upload_path']   =  './storage/AdharCard/';
+          
+      }else if($upload_type==3){
+          
+           $config['upload_path']   =  './storage/PanCard/';
+          
+      }else if($upload_type==4){
+          
+           $config['upload_path']   =  './storage/profile_pics/';
+      }
+      else if($upload_type==5){
+          
+           $config['upload_path']   =  './storage/Government/';
+          
+      }else if($upload_type==6){
+          
+           $config['upload_path']   =  './storage/VehicleRegistration/';
+          
+      }else if($upload_type==7){
+          
+           $config['upload_path']   =  './storage/VehicleInsurance/';
+          
+      }else if($upload_type==8){
+          
+           $config['upload_path']   =  './storage/FitnessCertificates/';
+          
+      }else if($upload_type==9){
+          
+           $config['upload_path']   =  './storage/VehiclePermit/';
+          
+      }else if($upload_type==10){
+          
+           $config['upload_path']   =  './storage/VehicleImages/';
+          
+      }else if($upload_type==11){
+          
+           $config['upload_path']   =  './storage/testing/';
+          
+      }
+        
+    
+		$this->load->library('upload');
+
+
+        $config['allowed_types'] =  '*';
+
+       
+       $data = [];
+   
+       $imagedata=array();
+         
+      $count = count($_FILES['image']['name']);
+     if($count>0){
+      // print_r($count);
+          
+     // for($i=0;$i<$count;$i++){
+    
+        if(!empty($_FILES['image']['name'])){
+            
+            
+          $config['file_name'] = date("Ymd_His").$_FILES['image']['name'];
+            
+          $_FILES['file']['name'] = $_FILES['image']['name'];
+          $_FILES['file']['type'] = $_FILES['image']['type'];
+          $_FILES['file']['tmp_name'] = $_FILES['image']['tmp_name'];
+          $_FILES['file']['error'] = $_FILES['image']['error'];
+          $_FILES['file']['size'] = $_FILES['image']['size'];
+  
+    
+    
+        $this->upload->initialize($config);
+
+          $config['allowed_types'] = 'gif|jpg|png|jpeg';
+         $this->load->library('upload',$config);
+         if($this->upload->do_upload('file'))
+        {
+           $filedata = $this->upload->data();
+           $this->resize_image($filedata['full_path']);
+             
+             $imagedata =$filedata;
+        }else{
+             
+             $imagedata =$this->upload->display_errors();
+           //  echo 'ki';
+         }
+            
+            
+            
+            
+        }
+   
+     // }
+          
+          
+	        $ret_val ['responsecode'] = 1;
+
+			$ret_val ['result_arr']=array($imagedata);
+
+			$ret_val ['responsemsg'] = "Success";
+
+			$this->response($ret_val,200);
+      }else{
+              
+              $ret_val ['responsecode'] = 2;
+
+			$ret_val ['responsemsg'] = 'Please Selete At Least One Image!';
+
+			$this->response($ret_val, 400);
+              
+          }
+      }else{
+          
+          
+          		$ret_val ['responsecode'] = 2;
+
+			$ret_val ['responsemsg'] = 'User Type Not Valid!';
+
+			$this->response($ret_val, 400);
+			
+			
+      }
+        
+        
+        
+
+	}
     
     
 
