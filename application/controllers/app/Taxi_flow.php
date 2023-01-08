@@ -2328,8 +2328,9 @@ location yet.!", 'distance' => number_format($km, 2),  'response' => NULL);
        
        $data = [];
    
+         
       $count = count($_FILES['image']['name']);
-    
+     if($count==0){
       // print_r($count);
           
       for($i=0;$i<$count;$i++){
@@ -2378,7 +2379,15 @@ location yet.!", 'distance' => number_format($km, 2),  'response' => NULL);
 			$ret_val ['responsemsg'] = "Success";
 
 			$this->response($ret_val,200);
-		
+      }else{
+              
+              $ret_val ['responsecode'] = 2;
+
+			$ret_val ['responsemsg'] = 'Please Selete At Least One Image!';
+
+			$this->response($ret_val, 400);
+              
+          }
       }else{
           
           
