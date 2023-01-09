@@ -26,17 +26,18 @@
               </h1>
               <div class="pull-right ">              
                  <input type="hidden" name="hiv" id="hiv" value="0" />
+                  
                            </div>
             </div><!-- /.page-header -->
             
              <?php //echo $message; ?>
 
-           <div class="row">
+           <div class="container">
               <div class="col-xs-12">
                 <!-- PAGE CONTENT BEGINS -->
                     <form class="form-horizontal" role="form" name="myform" id="myform" method="post" action="<?php echo base_url()?>admin/roles/update_employees" enctype="multipart/form-data">
               <div class="row">
-                <div class="col-lg-9 col-xs-12 col-sm-9 col-md-9 col-lg-offset-1">
+                <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12">
 
               
 
