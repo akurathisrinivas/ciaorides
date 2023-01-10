@@ -12,6 +12,12 @@ class Register extends CI_Controller {
         $this->load->model('admin/registermodel');
         $this->load->helper('url', 'form', 'HTML');
         $this->load->library(array('form_validation', 'session'));
+
+        /*if($this->session->userdata('user_id') != 'superadmin'){
+         $this->data['roleResponsible'] = $this->common_model->get_responsibilities();
+         }else{
+         $this->data['roleResponsible'] = $this->common_model->get_default_responsibilities();
+         }*/
     }
 
     /* ----------- amount_calculations -------------- user_details */

@@ -189,6 +189,7 @@
 <script src="<?= base_url('admin_assets/') ?>js/charts.js"></script>
 <script src="<?= base_url('admin_assets/') ?>dist/js/theme.min.js"></script>
 <script src="https://cdn.datatables.net/plug-ins/1.10.21/api/fnPagingInfo.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>admin_assets/js/jquery.toast.js"></script>
 <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
 <script>
     (function (b, o, i, l, e, r) {
@@ -205,6 +206,86 @@
     }(window, document, 'script', 'ga'));
     ga('create', 'UA-XXXXX-X', 'auto');
     ga('send', 'pageview');
+</script>
+
+<?php 
+
+$msg='';
+
+$icon='';
+
+$icon='';
+
+if($this->session->flashdata('success')!='')
+
+{
+
+$msg=$this->session->flashdata('success');
+
+$heading='Success';
+
+$icon='success';
+
+}
+
+else if($this->session->flashdata('error')!=''){
+
+$msg=$this->session->flashdata('error');
+
+$heading='Error';
+
+$icon='error';
+
+}
+
+else if(isset($error) && $error!=''){
+
+$msg=$error;
+
+$heading='Error';
+
+$icon='error';
+
+}
+
+else if(isset($success) && $success!=''){
+
+$msg=$success;
+
+$icon='success';
+
+$heading='Success';
+
+}
+
+?>
+
+<script type="text/javascript">
+
+jQuery(function($) {
+    
+<?php if($msg!=''){?>
+
+    $.toast({
+
+    heading: '<?php echo $heading;?>',
+
+    text: '<?php echo $msg;?>',
+
+    showHideTransition: 'fade',
+
+    position: 'top-center',
+
+    icon: '<?php echo $icon;?>'
+
+    });
+
+<?php } ?>
+
+
+
+});
+
 </script>
 </body>
 </html>

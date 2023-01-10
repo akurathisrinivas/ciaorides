@@ -30,7 +30,7 @@ class Roles extends CI_Controller {
         $this->load->helper('url', 'form', 'HTML');
         $this->load->library(array('form_validation', 'session'));
 
-        $this->session->set_userdata('user_id','ADM0001');
+        $this->session->set_userdata('user_id','superadmin');
     }
 
     public function is_logged_in() {
@@ -46,7 +46,7 @@ class Roles extends CI_Controller {
 	{		
 
 		//$this->data['url']='admin/roles/roles/';
-		if($this->session->userdata('user_id') != 'ADM0001'){
+		if($this->session->userdata('user_id') != 'superadmin'){
 		 $data['roleResponsible'] = $this->common_model->get_responsibilities();
 	     }else{
 		 $data['roleResponsible'] = $this->common_model->get_default_responsibilities();
@@ -58,7 +58,7 @@ class Roles extends CI_Controller {
 	{		
 
 		//$this->data['url']='admin/roles/roles/';
-		if($this->session->userdata('user_id') != 'ADM0001'){
+		if($this->session->userdata('user_id') != 'superadmin'){
 		 $data['roleResponsible'] = $this->common_model->get_responsibilities();
 	     }else{
 		 $data['roleResponsible'] = $this->common_model->get_default_responsibilities();
@@ -69,7 +69,7 @@ class Roles extends CI_Controller {
 
 	public function add_roles()
 	{  
-		if($this->session->userdata('user_id') != 'ADM0001'){
+		if($this->session->userdata('user_id') != 'superadmin'){
 		 $data['roleResponsible'] = $this->common_model->get_responsibilities();
 	     }else{
 		 $data['roleResponsible'] = $this->common_model->get_default_responsibilities();
@@ -129,7 +129,7 @@ class Roles extends CI_Controller {
 				}
 				redirect(base_url().'/admin/roles/edit_roles/'.$id);
 		}
-		if($this->session->userdata('user_id') != 'ADM0001'){
+		if($this->session->userdata('user_id') != 'superadmin'){
 		 $data['roleResponsible'] = $this->common_model->get_responsibilities();
 	     }else{
 		 $data['roleResponsible'] = $this->common_model->get_default_responsibilities();
@@ -202,7 +202,7 @@ class Roles extends CI_Controller {
     }
 	public function employees()
 	{		
-		if($this->session->userdata('user_id') != 'ADM0001'){
+		if($this->session->userdata('user_id') != 'superadmin'){
 		 $data['roleResponsible'] = $this->common_model->get_responsibilities();
 	     }else{
 		 $data['roleResponsible'] = $this->common_model->get_default_responsibilities();
@@ -217,7 +217,7 @@ class Roles extends CI_Controller {
 		$data['roles']=$this->common_model->get_table('roles',array('delete_status'=>'1','status'=>'1'),array('id','rolename'));
 		
 		//echo '<pre>';print_r($data['roles']);exit;
-		if($this->session->userdata('user_id') != 'ADM0001'){
+		if($this->session->userdata('user_id') != 'superadmin'){
 		 $data['roleResponsible'] = $this->common_model->get_responsibilities();
 	     }else{
 		 $data['roleResponsible'] = $this->common_model->get_default_responsibilities();
@@ -336,7 +336,7 @@ class Roles extends CI_Controller {
 			$address_proof='';
 			}
 
-		$to_payment_mode_id=implode(',',$this->input->post('to_payment_mode_id'));
+		
 		$data=array(
 						
 						'role_ids'=>$role_ids,
@@ -361,7 +361,7 @@ class Roles extends CI_Controller {
 			$this->session->set_flashdata('success', 'Record added Successfully.');
 			redirect('admin/roles/add_employees', 'refresh');				
 		}else{
-			$res=$this->common_model->get_table_row('users',array('id'=>$id),array());
+			$res=$this->common_model->get_table_row('employees',array('id'=>$id),array());
 			//echo '<pre>';print_r($image);
 			if($image == ''){
 			$data['image']= $res['image'];
@@ -392,7 +392,7 @@ class Roles extends CI_Controller {
 	public function view_employee($id)
 	{
 		$data['record']=$this->my_model->view_employee($id);
-		if($this->session->userdata('user_id') != 'ADM0001'){
+		if($this->session->userdata('user_id') != 'superadmin'){
 		 $data['roleResponsible'] = $this->common_model->get_responsibilities();
 	     }else{
 		 $data['roleResponsible'] = $this->common_model->get_default_responsibilities();
@@ -413,7 +413,7 @@ class Roles extends CI_Controller {
 		
 		
 		}		
-		 if($this->session->userdata('user_id') != 'ADM0001'){
+		 if($this->session->userdata('user_id') != 'superadmin'){
 		 $data['roleResponsible'] = $this->common_model->get_responsibilities();
 	     }else{
 		 $data['roleResponsible'] = $this->common_model->get_default_responsibilities();
@@ -434,7 +434,7 @@ class Roles extends CI_Controller {
 	}
 	public function change_employee_status($user_id, $status)
 	{
-		if($this->my_model->change_status('users',$user_id, $status) == true)
+		if($this->my_model->change_status('employees',$user_id, $status) == true)
 		{
 		$this->session->set_flashdata('success', 'Status Updated Successfully.');
 		}

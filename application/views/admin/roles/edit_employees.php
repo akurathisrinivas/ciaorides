@@ -169,62 +169,9 @@
 
               </div>
 
-               <div class="form-group">
-                    <div class="col-md-3 col-xs-12 control-label">
-                   From  Payment Mode
-                    </div>
-                     <div  class="col-md-6 col-xs-12">
-                      <select class="form-control" name="payment_mode_id" id="payment_mode_id" required="" >
-                              <option value="">Select Payment Mode</option>
+              
 
-                               <?php
-                                if(!empty($payment_modes))
-                                {
-                                  foreach($payment_modes as $pm)
-                                  {
-                                    ?>
-                                    <option value="<?=$pm['id'];?>" 
-                                      <?php if($pm['id'] == $row->payment_mode_id){?> selected <?php }?> 
-                                      ><?=$pm['payment_mode'];?></option>
-                                    <?php
-                                  }
-                                }
-                                ?>
-                                
-                              </select>
-                    </div>
-                    </div>
-
-                    <div class="form-group">
-                    <div class="col-md-3 col-xs-12 control-label">
-                   To  Payment Mode
-                    </div>
-                     <div  class="col-md-6 col-xs-12">
-                      <select class="form-control standardSelect" multiple name="to_payment_mode_id[]" id="to_payment_mode_id" required="" >
-                              <option value="">Select Payment Mode</option>
-
-                               <?php
-                                if(!empty($payment_modes))
-                                {
-                                  foreach($payment_modes as $pm)
-                                  {
-                                    $db_to_payment_mode_ids=explode(',',$row->to_payment_mode_id);
-                                    ?>
-                                    <option value="<?=$pm['id'];?>"
-
-                                      
-                            <?php foreach($db_to_payment_mode_ids as $r_id){
-                            if($r_id == $pm['id']){?> selected <?php } }?> ><?php echo $pm['payment_mode']?>
-
-                                        </option>
-                                    <?php
-                                  }
-                                }
-                                ?>
-                                
-                              </select>
-                    </div>
-                    </div>
+                  
 
               <div class="form-group">
               <label  class="col-md-3 col-xs-6 control-label">Address Proof <span style="color:red">*</span></label>
@@ -293,8 +240,8 @@
 
 </div>
 
-<link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/css/chosen/chosen.min.css">
-<script src="<?php echo base_url(); ?>assets/admin/js/chosen/chosen.jquery.min.js"></script>
+<link rel="stylesheet" href="<?php echo base_url(); ?>admin_assets/css/chosen/chosen.min.css">
+<script src="<?php echo base_url(); ?>admin_assets/js/chosen/chosen.jquery.min.js"></script>
 <script>
     $(document).ready(function () {
         $(".standardSelect").chosen({

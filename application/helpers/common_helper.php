@@ -665,3 +665,41 @@ function decodeEmoticons($src) {
     }
     return $result;
 }
+
+
+
+
+ function getDynamicId($column_name,$dynamic_test){
+
+        $ci = &get_instance();
+        /* Reference No */
+        $reference_id='';
+        $ci->db->select("*");
+        $ci->db->from('tbl_dynamic_nos');
+        $query = $ci->db->get();
+        $row_count = $query->num_rows();
+        if($row_count > 0){
+
+            $refers_no = $query->row_array();
+            $ref_no=$refers_no[$column_name]+1;
+            $refernce_data = array($column_name => $ref_no,
+                                   'update_date_time'    => date('Y-m-d H:i:s')
+                                   );
+            $ci->db->where('id',1);
+            $update = $ci->db->update('tbl_dynamic_nos', $refernce_data);
+        }else{
+
+            $ref_no=1;
+            $refernce_data =   array($column_name => $ref_no,
+                                    'update_date_time'   => date('Y-m-d H:i:s')
+                                    );
+            $update = $ci->db->insert('tbl_dynamic_nos', $refernce_data); 
+        }
+        
+        
+        $reference_id =  $dynamic_test.$ref_no;
+        
+        //$reference_id="BBM".$ref_no;
+        /* Reference No */
+        return $reference_id;
+}

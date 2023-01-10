@@ -43,8 +43,8 @@ class Login extends CI_Controller {
         if (!empty($row)) {
             $this->session->set_userdata(array(
                 'admin_id' => $row->id,
-                // 'name'       => $row->name,
-                // 'type'       => $row->type,
+                 'user_id'       => $row->user_id,
+                 'user_type'       => $row->user_type,
                 'username' => $username,
                 'is_logged_in' => TRUE
             ));
@@ -61,6 +61,22 @@ class Login extends CI_Controller {
             redirect('admin/home', 'refresh');
         }
     }
+
+    public function logout(){
+        //$this->my_model->logout_time();
+        $user_data = $this->session->all_userdata();
+            foreach ($user_data as $key => $value) {
+                
+                    $this->session->unset_userdata($key);
+            
+            }
+            
+            $this->session->sess_destroy();
+            $this->session->set_flashdata( 'message', 'Successfully Logout..' );
+            //$this->data['logout_message']="Successfully Logout..";
+            redirect(base_url('admin'));
+    }
+
 
 }
 

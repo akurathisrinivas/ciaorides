@@ -32,6 +32,7 @@
         <!--<script src="<?= base_url(); ?>assets/js/jquery.validate.min.js"></script>-->
         <script src="<?= base_url(); ?>assets/js/tableToExcel.js"></script>
         <!--<script src="http://maps.google.com/maps/api/js?key=AIzaSyCu0v1SDu6-BkV6RaDcXaSgRnTuMJlgQY&libraries=places&region=ind&language=en&sensor=false"></script>-->
+         <link rel="stylesheet" href="<?php echo base_url();?>admin_assets/css/jquery.toast.css" />
         <style>
             .pagination .page-item .page-link {
                 padding: 6px 11px !important;
