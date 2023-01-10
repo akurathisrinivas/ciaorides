@@ -58,9 +58,9 @@
               <div  class="col-md-6 col-xs-12">
 
             <select class="form-control standardSelect"  multiple   name="role_ids[]" id="roles_ids" required="" >
-              <!-- <?php foreach($roles as $val){?>
+               <?php foreach($roles as $val){?>
                   <option value="<?php echo $val['id']?>"><?php echo $val['rolename']?></option>
-               <?php }?> --> 
+               <?php }?> 
 
                 </select>
 
@@ -269,9 +269,9 @@
 
 
 
-<link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/css/chosen/chosen.min.css">
+<link rel="stylesheet" href="<?php echo base_url(); ?>admin_assets/css/chosen/chosen.min.css">
 
-<script src="<?php echo base_url(); ?>assets/admin/js/chosen/chosen.jquery.min.js"></script>
+<script src="<?php echo base_url(); ?>admin_assets/js/chosen/chosen.jquery.min.js"></script>
 <script>
     $(document).ready(function () {
         $(".standardSelect").chosen({
