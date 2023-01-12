@@ -621,6 +621,7 @@ location yet.!", 'distance' => number_format($km, 2),  'response' => NULL);
 
 
         $booking_id = mt_rand(10000000, 99999999);
+        $otp = mt_rand(1000, 9999);
 
         $data = array(
             'booking_id' => $booking_id,
@@ -644,6 +645,7 @@ location yet.!", 'distance' => number_format($km, 2),  'response' => NULL);
             'ciao_commission' => round($ciao_commission),
             'total_amount' => round($total_amount),
             'ride_type' => $ride_type,
+            'otp'=>$otp,
             'ride_time' => date('Y-m-d H:i:s', strtotime($ride_time)),
             'created_on' => date('Y-m-d H:i:s')
         );
@@ -679,7 +681,7 @@ location yet.!", 'distance' => number_format($km, 2),  'response' => NULL);
                 $distance_time['time'] = "31 mins";
 
             // echo '<pre>';print_r($order_details);exit;
-            $otp = mt_rand(1000, 9999);
+            
             $mobile=$order_details[0]['mobile'];
             $message = 'Dear Customer ' . $otp . ' is your One Time Password for CIAO Rides. Thank You.';
             //SendSMS($mobile, $message);
