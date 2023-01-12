@@ -182,8 +182,9 @@ class Taxi_flow extends REST_Controller {
         } else {
             $response = array('status' => true, 'message' => 'Data Fetched successfully!','response'=>$result);
         }
-        TrackResponse($user_input, $response);
-        $this->response($response);
+       // TrackResponse($user_input, $response);
+       // $this->response($response);
+        print_r(json_encode($response));
 
     } 
 
